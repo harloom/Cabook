@@ -1,9 +1,14 @@
 package com.harloomdev.camerabooking.Http.conf.API.Model;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Products {
+public class Products implements Parcelable {
     @SerializedName("id_kamera")
     @Expose
     private String idKamera;
@@ -16,9 +21,50 @@ public class Products {
     @SerializedName("stok")
     @Expose
     private Integer stok;
+    @SerializedName("url_image")
+    @Expose
+    private int urlImage;
     @SerializedName("satuan")
     @Expose
     private String satuan;
+
+    public Products(String idKamera, String namaKamera, Integer harga, Integer stok, int urlImage, String satuan) {
+        this.idKamera = idKamera;
+        this.namaKamera = namaKamera;
+        this.harga = harga;
+        this.stok = stok;
+        this.urlImage = urlImage;
+        this.satuan = satuan;
+    }
+
+    protected Products(Parcel in) {
+        idKamera = in.readString();
+        namaKamera = in.readString();
+        if (in.readByte() == 0) {
+            harga = null;
+        } else {
+            harga = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            stok = null;
+        } else {
+            stok = in.readInt();
+        }
+        urlImage = in.readInt();
+        satuan = in.readString();
+    }
+
+    public static final Creator<Products> CREATOR = new Creator<Products>() {
+        @Override
+        public Products createFromParcel(Parcel in) {
+            return new Products(in);
+        }
+
+        @Override
+        public Products[] newArray(int size) {
+            return new Products[size];
+        }
+    };
 
     public String getIdKamera() {
         return idKamera;
@@ -52,6 +98,14 @@ public class Products {
         this.stok = stok;
     }
 
+    public int getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(int urlImage) {
+        this.urlImage = urlImage;
+    }
+
     public String getSatuan() {
         return satuan;
     }
@@ -67,7 +121,33 @@ public class Products {
                 ", namaKamera='" + namaKamera + '\'' +
                 ", harga=" + harga +
                 ", stok=" + stok +
+                ", urlImage='" + urlImage + '\'' +
                 ", satuan='" + satuan + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(idKamera);
+        parcel.writeString(namaKamera);
+        if (harga == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(harga);
+        }
+        if (stok == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(stok);
+        }
+        parcel.writeInt(urlImage);
+        parcel.writeString(satuan);
     }
 }

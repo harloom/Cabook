@@ -5,12 +5,12 @@ import com.harloomdev.camerabooking.Http.conf.Server;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginClient {
+public class ProductClient {
     public static Retrofit retrofit  = null;
     public  static  Retrofit getLoginClient(){
         if(retrofit == null ){
             retrofit  =   new Retrofit.Builder()
-                    .baseUrl(Server.BASE_URL_Login)
+                    .baseUrl(Server.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

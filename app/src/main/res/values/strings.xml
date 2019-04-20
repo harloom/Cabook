@@ -19,7 +19,7 @@
     <string name="title_shooping_cart">My Cart</string>
     <string name="title_orders">Orders</string>
     <string name="title_profile">Profile</string>
-    <string name="title_activity_product">Product</string>
+    <string name="title_activity_product"> </string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_cek_acitvity">CekAcitvity</string>
