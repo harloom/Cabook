@@ -7,9 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.harloomdev.camerabooking.Activity.Adapter.OnChartClickListener;
 import com.harloomdev.camerabooking.R;
 
-public class CekAcivity extends AppCompatActivity {
+public class CekAcivity extends AppCompatActivity  implements OnChartClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,4 +33,13 @@ public class CekAcivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
     }
 
+    @Override
+    public void onButtonPlush(int position) {
+
+    }
+
+    @Override
+    public void onButtonMinus(int position) {
+
+    }
 }
