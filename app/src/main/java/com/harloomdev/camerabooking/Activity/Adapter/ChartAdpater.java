@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
 import com.harloomdev.camerabooking.R;
 
@@ -19,10 +20,10 @@ import java.util.ArrayList;
 
 public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> {
     private Context context;
-    private ArrayList<Products> arrayList = new ArrayList<>();
+    private Chart arrayList = new Chart();
     private OnChartClickListener mAdapterCallback;
 
-    public ChartAdpater(Context context, ArrayList<Products> arrayList, OnChartClickListener mAdapterCallback) {
+    public ChartAdpater(Context context, Chart arrayList, OnChartClickListener mAdapterCallback) {
         this.context = context;
         this.arrayList = arrayList;
         this.mAdapterCallback = mAdapterCallback;
@@ -32,25 +33,27 @@ public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rcy_chart,viewGroup,false);
-
         return new ViewHolder(view,mAdapterCallback);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder v, int i) {
-        Products item = arrayList.get(i);
+        Chart item = arrayList;
 
-        Glide.with(context).load(item.getUrlImage()).
-                into(v.v_imgProduct);
-        v.v_nameProduct.setText(item.getNamaKamera());
-        v.v_hargaProduct.setText("Rp. "+item.getHarga());
+//        Glide.with(context).load(item.getUrlImage()).
+//                into(v.v_imgProduct);
+        v.v_nameProduct.setText(item.getRecordset().get(i).getNama());
+        v.v_hargaProduct.setText("Rp. "+item.getRecordset().get(i).getHarga());
+        v.v_count.setText(item.getRecordset().get(i).getJumlahPinjam().toString());
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return arrayList.getRecordset().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder   {

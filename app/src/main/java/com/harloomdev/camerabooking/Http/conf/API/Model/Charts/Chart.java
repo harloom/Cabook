@@ -1,6 +1,7 @@
 
 package com.harloomdev.camerabooking.Http.conf.API.Model.Charts;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -25,6 +26,19 @@ public class Chart  {
     @SerializedName("total_bayar")
     @Expose
     private Integer totalBayar;
+
+    public Chart(List<List<Recordset>> recordsets, List<Recordset_> recordset, Output output, List<Integer> rowsAffected, Integer returnValue, Integer totalBayar) {
+        this.recordsets = recordsets;
+        this.recordset = recordset;
+        this.output = output;
+        this.rowsAffected = rowsAffected;
+        this.returnValue = returnValue;
+        this.totalBayar = totalBayar;
+    }
+
+    public Chart() {
+    }
+
 
     public List<List<Recordset>> getRecordsets() {
         return recordsets;

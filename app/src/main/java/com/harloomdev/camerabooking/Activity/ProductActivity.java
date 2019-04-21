@@ -57,6 +57,10 @@ public class ProductActivity extends AppCompatActivity  implements OnProductClic
         mRecyclerView.setLayoutManager(gridLayoutManager);
         ProductAdpater mAdapter = new ProductAdpater(context,mArray,this);
         mRecyclerView.setAdapter(mAdapter);
+
+
+
+
     }
 
 

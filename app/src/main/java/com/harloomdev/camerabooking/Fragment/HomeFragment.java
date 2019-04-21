@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.harloomdev.camerabooking.Activity.CekAcivity;
 import com.harloomdev.camerabooking.Activity.ProductActivity;
 import com.harloomdev.camerabooking.R;
 
@@ -31,6 +32,14 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.btn_chart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext() , CekAcivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

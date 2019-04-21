@@ -34,6 +34,21 @@ public class Recordset {
     @Expose
     private Integer jumlahBayar;
 
+    public Recordset(String idKtp, String idKamera, String namaKamera, Integer harga, Integer jumlahPinjam, String satuan, Object urlImage, String nama, Integer jumlahBayar) {
+        this.idKtp = idKtp;
+        this.idKamera = idKamera;
+        this.namaKamera = namaKamera;
+        this.harga = harga;
+        this.jumlahPinjam = jumlahPinjam;
+        this.satuan = satuan;
+        this.urlImage = urlImage;
+        this.nama = nama;
+        this.jumlahBayar = jumlahBayar;
+    }
+
+    public Recordset() {
+    }
+
     public String getIdKtp() {
         return idKtp;
     }
