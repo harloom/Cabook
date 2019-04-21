@@ -1,25 +1,21 @@
 package com.harloomdev.camerabooking.Activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.harloomdev.camerabooking.Activity.Adapter.ChartAdpater;
 import com.harloomdev.camerabooking.Activity.Adapter.OnChartClickListener;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
-import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset_;
 import com.harloomdev.camerabooking.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CekAcivity extends AppCompatActivity  implements OnChartClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class CekAcivity extends AppCompatActivity implements OnChartClickListener {
     private RecyclerView recyclerView ;
     private ChartAdpater chartAdpater ;
 //    private ArrayList<Chart> charts = new ArrayList<>();

@@ -4,9 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +20,8 @@ import com.harloomdev.camerabooking.Http.conf.API.Client.LoginClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.Server;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

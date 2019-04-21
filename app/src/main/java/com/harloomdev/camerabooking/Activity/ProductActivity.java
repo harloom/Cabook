@@ -2,15 +2,7 @@ package com.harloomdev.camerabooking.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
-
 
 import com.harloomdev.camerabooking.Activity.Adapter.OnProductClickListener;
 import com.harloomdev.camerabooking.Activity.Adapter.ProductAdpater;
@@ -19,7 +11,12 @@ import com.harloomdev.camerabooking.R;
 
 import java.util.ArrayList;
 
-public class ProductActivity extends AppCompatActivity  implements OnProductClickListener{
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class ProductActivity extends AppCompatActivity implements OnProductClickListener{
     private Context context   = this;
     private RecyclerView mRecyclerView ;
     private ArrayList<Products> mArray  = new ArrayList<>();
