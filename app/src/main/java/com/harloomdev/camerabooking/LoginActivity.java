@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.form_login);
+        mLoginFormView = findViewById(R.id.container_login);
         mProgressView = findViewById(R.id.login_progress);
     }
 

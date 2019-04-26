@@ -4,119 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bakground_login"
+    android:background="#ffff"
     tools:context=".LoginActivity">
     <!-- Login progress -->
     <ProgressBar
-        android:layout_centerInParent="true"
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
         android:visibility="gone" />
-
     <RelativeLayout
-        android:id="@+id/headerLogin"
+        android:id="@+id/container_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/form_login"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/bakground_login"
 
-        <TextView
-            android:layout_width="wrap_content"
+        >
+        <RelativeLayout
+            android:id="@+id/headerLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/form_login"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:text="LOGIN"
+                android:textColor="@color/colorPrimary"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/carakter" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/form_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
-            android:text="LOGIN"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40dp"
-            android:textStyle="bold" />
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/bgf_login"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/carakter" />
+            <EditText
+                android:id="@+id/id_ktp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ffff"
+                android:drawableLeft="@drawable/ic_account_circle_primary"
+                android:hint="No KTP"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ffff"
+                android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:src="@drawable/ic_lock_open_black_24dp"
+            />
+
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/form_login"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_root"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            android:textSize="12sp" />
+
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnRegister"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_root"
+            android:text="Forgot Password"
+            android:textAllCaps="false"
+            android:textColor="#ffff"
+            android:textSize="12sp" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/form_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/bgf_login"
-        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/id_ktp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ffff"
-            android:drawableLeft="@drawable/ic_account_circle_primary"
-            android:hint="No KTP"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#ffff"
-            android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnLogin"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/ic_lock_open_black_24dp" />
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRegister"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/button_root"
-        android:text="Register"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textSize="12sp" />
-
-
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnRegister"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/button_root"
-        android:text="Forgot Password"
-        android:textAllCaps="false"
-        android:textColor="#ffff"
-        android:textSize="12sp" />
 </RelativeLayout>
