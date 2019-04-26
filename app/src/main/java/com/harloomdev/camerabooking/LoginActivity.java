@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.harloomdev.camerabooking.Http.conf.API.Client.LoginClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.Server;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
@@ -57,9 +58,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_layout);
         // Set up the login form.
-        mId = (EditText) findViewById(R.id.email);
+        mId = (EditText) findViewById(R.id.id_ktp);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -72,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        FloatingActionButton mEmailSignInButton = (FloatingActionButton) findViewById(R.id.btnLogin);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.toMainActivity).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.btnRegister).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent  =new Intent(getBaseContext(),MainActivity.class);
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.form_login);
         mProgressView = findViewById(R.id.login_progress);
     }
 

@@ -23,7 +23,8 @@
         android:visibility="gone" />
 
     <ScrollView
-        android:id="@+id/login_form"
+        android:id="@+id/form_login"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -38,7 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/id_ktp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="idKTP"
@@ -67,7 +68,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/btnLogin"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +76,7 @@
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
             <Button
-                android:id="@+id/toMainActivity"
+                android:id="@+id/btnRegister"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
