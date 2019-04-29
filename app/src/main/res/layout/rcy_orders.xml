@@ -7,12 +7,161 @@
     app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
     <com.ramotion.foldingcell.FoldingCell
+        android:id="@+id/folding_cell"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:additionalFlipsCount="2"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
         app:animationDuration="1300"
         app:backSideColor="@color/colorPrimary"
-        app:cameraHeight="30">
+        app:cameraHeight="20">
+        <!--//cellcontent-->
+        <LinearLayout
+            android:id="@+id/cell_content_view"
+            android:layout_width="match_parent"
+            android:layout_height="420dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <LinearLayout
+                android:id="@+id/cell_content"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_weight="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/ctanggal"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2018-01-01"
+                        android:textAllCaps="false"
+                        android:textColor="#ffff"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_compare_arrows_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/ctanggalEx"
+                        android:padding="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2018-01-03"
+                        android:textAllCaps="false"
+                        android:textColor="#ffff"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/ctxt_kwitansi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="5dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="K0000000021"/>
+
+                    <TextView
+                        android:id="@+id/ctxt_jenisService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="6dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="Antar"/>
+                    <TextView
+                        android:id="@+id/ctxtNamaOrder"
+                        android:layout_below="@id/ctxt_kwitansi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="3dp"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="Ilham SOlehudin"/>
+                    <TextView
+                        android:id="@+id/ctxtAlamatAntar"
+                        android:layout_below="@id/ctxtNamaOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="3dp"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="Jalan Khaibrass no 63 Metro"/>
+                    <TextView
+                        android:id="@+id/ctxtTotal"
+                        android:layout_below="@id/ctxtAlamatAntar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="3dp"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:text="Rp. 200.000"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyleOrderBarang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp">
+            </androidx.recyclerview.widget.RecyclerView>
+            <TextView
+                android:id="@+id/ctxtTotalBayar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:text="Rp. 200.000"/>
+            <Button
+                android:id="@+id/cbtn_cancelOrder"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                app:cornerRadius="5dp"
+                android:background="@color/colorPrimary"
+                android:textColor="#fff"
+                android:text="Batalkan"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
         <!--cell tititle-->
         <LinearLayout
             android:id="@+id/cell_title_view"
@@ -29,6 +178,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/txtTitleTanggal"
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,6 +195,7 @@
                     android:src="@drawable/ic_compare_arrows_black_24dp" />
 
                 <TextView
+                    android:id="@+id/txtTitleTanggalEx"
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,147 +273,7 @@
                     android:text="Rp. 200.000"/>
             </RelativeLayout>
         </LinearLayout>
-        <!--//cellcontent-->
-        <LinearLayout
-            android:id="@+id/cell_content_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_weight="2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:padding="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="2018-01-01"
-                        android:textAllCaps="false"
-                        android:textColor="#ffff"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_compare_arrows_black_24dp" />
-
-                    <TextView
-                        android:padding="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="2018-01-03"
-                        android:textAllCaps="false"
-                        android:textColor="#ffff"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/ctxt_kwitansi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginStart="5dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:text="K0000000021"/>
-
-                    <TextView
-                        android:id="@+id/ctxt_jenisService"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginEnd="6dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:text="Antar"/>
-                    <TextView
-                        android:id="@+id/ctxtNamaOrder"
-                        android:layout_below="@id/ctxt_kwitansi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="3dp"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:text="Ilham SOlehudin"/>
-                    <TextView
-                        android:id="@+id/ctxtAlamatAntar"
-                        android:layout_below="@id/ctxtNamaOrder"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="3dp"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:text="Jalan Khaibrass no 63 Metro"/>
-                    <TextView
-                        android:id="@+id/ctxtTotal"
-                        android:layout_below="@id/ctxtAlamatAntar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="3dp"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:text="Rp. 200.000"/>
-                </RelativeLayout>
-            </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyleOrderBarang"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </androidx.recyclerview.widget.RecyclerView>
-            <TextView
-                android:id="@+id/txtTotalBayar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="3dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:text="Rp. 200.000"/>
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:cornerRadius="5dp"
-                android:background="@color/colorPrimary"
-                android:textColor="#fff"
-                android:text="Batalkan"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"/>
-        </LinearLayout>
 
     </com.ramotion.foldingcell.FoldingCell>
 
