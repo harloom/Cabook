@@ -32,6 +32,7 @@
             android:layout_marginRight="30dp">
 
             <TextView
+                android:id="@+id/labelLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -58,6 +59,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/bgf_login"
+            android:elevation="8dp"
             android:orientation="vertical">
 
             <EditText
@@ -97,6 +99,7 @@
             android:background="@color/colorPrimary"
             android:textAllCaps="false"
             android:textSize="12sp"
+            app:elevation="10dp"
             android:src="@drawable/ic_lock_open_black_24dp"
             />
 

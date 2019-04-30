@@ -30,7 +30,7 @@
                 android:layout_marginStart="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+
                 android:text="Canoon C1"/>
             <TextView
                 android:id="@+id/o_txtHargaBarang"
@@ -42,7 +42,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+
                 android:text="Rp. 240000"/>
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_marginEnd="8dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+
                 android:text="10 Unit"/>
             <TextView
                 android:id="@+id/o_txtTotalBarang"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+
                 android:text="Rp. 260000"/>
         </RelativeLayout>
     </LinearLayout>

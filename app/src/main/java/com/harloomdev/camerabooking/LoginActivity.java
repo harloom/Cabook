@@ -73,18 +73,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton mEmailSignInButton = (FloatingActionButton) findViewById(R.id.btnLogin);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        FloatingActionButton mSignInButton = (FloatingActionButton) findViewById(R.id.btnLogin);
+        mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
 
+
+        findViewById(R.id.labelLogin).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  =new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
         findViewById(R.id.btnRegister).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  =new Intent(getBaseContext(),MainActivity.class);
+                Intent intent  =new Intent(getBaseContext(),Register.class);
                 startActivity(intent);
             }
         });

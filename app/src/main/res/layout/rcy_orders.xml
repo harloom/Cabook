@@ -90,7 +90,7 @@
                         android:layout_marginEnd="6dp"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+
                         android:text="Antar"/>
                     <TextView
                         android:id="@+id/ctxtNamaOrder"
@@ -102,7 +102,7 @@
                         android:layout_marginTop="3dp"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+
                         android:text="Ilham SOlehudin"/>
                     <TextView
                         android:id="@+id/ctxtAlamatAntar"
@@ -114,7 +114,7 @@
                         android:layout_marginTop="3dp"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+
                         android:text="Jalan Khaibrass no 63 Metro"/>
                     <TextView
                         android:id="@+id/ctxtTotal"
@@ -231,7 +231,7 @@
                     android:layout_marginEnd="6dp"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+
                     android:text="Antar"/>
                 <TextView
                     android:id="@+id/txtNamaOrder"
@@ -243,7 +243,7 @@
                     android:layout_marginTop="3dp"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+
                     android:text="Ilham SOlehudin"/>
                 <TextView
                     android:id="@+id/txtAlamatAntar"
@@ -255,7 +255,7 @@
                     android:layout_marginTop="3dp"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+
                     android:text="Jalan Khaibrass no 63 Metro"/>
                 <TextView
                     android:id="@+id/txtTotal"

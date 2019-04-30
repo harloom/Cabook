@@ -26,9 +26,18 @@
     <string name="title_activity_cek_acivity">Cek</string>
 
     <string-array name="services">
-         <item>- Pilih Pelayanan -</item>
+        <item>- Pilih Pelayanan -</item>
         <item>Diantar</item>
         <item>Datang Sendiri</item>
+    </string-array>
+
+
+    <string name="spin_gender"> Choose Gender</string>
+    <string-array name="array_gender">
+        <item>Choose Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+
     </string-array>
 
 </resources>
