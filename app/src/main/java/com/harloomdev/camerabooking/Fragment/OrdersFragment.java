@@ -1,6 +1,5 @@
 package com.harloomdev.camerabooking.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +9,25 @@ import android.widget.Toast;
 
 import com.harloomdev.camerabooking.Activity.Adapter.AdapterOrders.OnOrderClickListener;
 import com.harloomdev.camerabooking.Activity.Adapter.AdapterOrders.OrderAdapter;
+import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
+import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 import com.harloomdev.camerabooking.R;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 
 public class OrdersFragment extends Fragment implements OnOrderClickListener {
@@ -61,6 +67,28 @@ public class OrdersFragment extends Fragment implements OnOrderClickListener {
         );
         mViewKwitansis.add(mKwitansi);
         mViewKwitansis.add(mKwitansi1);
+    }
+
+    private void getDataFromAPI(String _keyAPI,String _param){
+        Map<String , String > map  = new HashMap<>();
+        map.put("Content-Type","pplication/json");
+        map.put("key_api" , _keyAPI);
+        TaskServiceAPI taskServiceAPI = APIClient.createService().create(TaskServiceAPI.class);
+        Call<ArrayList<ViewKwitansi>> call = taskServiceAPI.getViewKwitansi(map,_param);
+        call.enqueue(new Callback<ArrayList<ViewKwitansi>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ViewKwitansi>> call, Response<ArrayList<ViewKwitansi>> response) {
+                if(response.code() == 200){
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ViewKwitansi>> call, Throwable t) {
+                Toast.makeText(getContext(), "Error : " +t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initRecyleview(View view){
