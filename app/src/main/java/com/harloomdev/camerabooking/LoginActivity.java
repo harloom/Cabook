@@ -16,9 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.harloomdev.camerabooking.Activity.Register.RegisterActivity;
 import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.btnRegister).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  =new Intent(getBaseContext(),Register.class);
+                Intent intent  =new Intent(getBaseContext(),RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -150,6 +153,8 @@ public class LoginActivity extends AppCompatActivity {
                                 , Toast.LENGTH_SHORT).show();
 
                     } else {
+                        ResponOther error = ErrorAPIUtils.parseError(response);
+                        Toast.makeText(LoginActivity.this, error.getStatusCode() +":" +error.getMassage(), Toast.LENGTH_SHORT).show();
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
                         mPasswordView.requestFocus();
                     }

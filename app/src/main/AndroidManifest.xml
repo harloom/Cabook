@@ -37,7 +37,7 @@
             android:name=".Activity.CekAcivity"
             android:label="@string/title_activity_cek_acivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Activity.Register.RegisterActivity"></activity>
     </application>
 
 </manifest>

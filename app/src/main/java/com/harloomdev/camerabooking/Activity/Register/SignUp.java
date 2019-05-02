@@ -1,26 +1,28 @@
-package com.harloomdev.camerabooking.Http.conf.API.Model;
+package com.harloomdev.camerabooking.Activity.Register;
 
-public class SignUp {
+public class SignUp implements  IRegister{
     private String idktp;
     private String nama;
     private String alamat;
     private String noHandphone;
     private String pekerjaan;
     private String jenis_kelamin;
-    private String tempat_lahir;
+    private String kota;
     private String tanggal_lahir;
     private String password;
+    private String confimPassword;
 
-    public SignUp(String idktp, String nama, String alamat, String noHandphone, String pekerjaan, String jenis_kelamin, String tempat_lahir, String tanggal_lahir, String password) {
+    public SignUp(String idktp, String nama, String alamat, String noHandphone, String pekerjaan, String jenis_kelamin, String kota, String tanggal_lahir, String password, String confimPassword) {
         this.idktp = idktp;
         this.nama = nama;
         this.alamat = alamat;
         this.noHandphone = noHandphone;
         this.pekerjaan = pekerjaan;
         this.jenis_kelamin = jenis_kelamin;
-        this.tempat_lahir = tempat_lahir;
+        this.kota = kota;
         this.tanggal_lahir = tanggal_lahir;
         this.password = password;
+        this.confimPassword = confimPassword;
     }
 
     public SignUp() {
@@ -74,12 +76,12 @@ public class SignUp {
         this.jenis_kelamin = jenis_kelamin;
     }
 
-    public String getTempat_lahir() {
-        return tempat_lahir;
+    public String getKota() {
+        return kota;
     }
 
-    public void setTempat_lahir(String tempat_lahir) {
-        this.tempat_lahir = tempat_lahir;
+    public void setKota(String kota) {
+        this.kota = kota;
     }
 
     public String getTanggal_lahir() {
@@ -98,6 +100,14 @@ public class SignUp {
         this.password = password;
     }
 
+    public String getConfimPassword() {
+        return confimPassword;
+    }
+
+    public void setConfimPassword(String confimPassword) {
+        this.confimPassword = confimPassword;
+    }
+
     @Override
     public String toString() {
         return "SignUp{" +
@@ -107,21 +117,34 @@ public class SignUp {
                 ", noHandphone='" + noHandphone + '\'' +
                 ", pekerjaan='" + pekerjaan + '\'' +
                 ", jenis_kelamin='" + jenis_kelamin + '\'' +
-                ", tempat_lahir='" + tempat_lahir + '\'' +
+                ", kota='" + kota + '\'' +
                 ", tanggal_lahir='" + tanggal_lahir + '\'' +
                 ", password='" + password + '\'' +
+                ", confimPassword='" + confimPassword + '\'' +
                 '}';
     }
 
-    public  Boolean isValidIdKtp (String id_ktp){
-        return id_ktp.length() == 16;
+//    public  Boolean isValidIdKtp (String id_ktp){
+//        return id_ktp.length() == 16;
+//    }
+//
+//    public  Boolean isValidIdnama (String nama){
+//        return nama.length()> 3;
+//    }
+//
+    public boolean isPasswordValid(String password) {
+       return password.length() > 4;
     }
 
-    public  Boolean isValidIdnama (String nama){
-        return nama.length()> 3;
+
+
+    public boolean validConfimPassword(String password , String confpassword){
+        return password.equals(confimPassword);
+
     }
 
-    private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+    @Override
+    public int validData() {
+        return 0;
     }
 }

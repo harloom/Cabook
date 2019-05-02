@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bakground_login"
-    tools:context=".Register">
-    <!-- Register progress -->
+    tools:context=".Activity.Register.RegisterActivity">
+    <!-- RegisterActivity progress -->
     <ProgressBar
         android:id="@+id/register_progress"
         style="?android:attr/progressBarStyleLarge"
