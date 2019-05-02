@@ -110,20 +110,25 @@
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textSize="16sp" />
-                        <EditText
+                        <LinearLayout
                             android:layout_weight="1.5"
-                            android:id="@+id/rgs_tglLahir"
+                            android:focusable="true"
+                            android:clickable="true"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="#ffff"
-                            android:drawableLeft="@drawable/ic_date_range_black_24dp"
-                            android:hint="Date Born"
-                            android:singleLine="true"
-                            android:textColor="@color/black"
-                            android:inputType="date"
-                            android:enabled="false"
-                            android:focusable="false"
-                            android:textSize="16sp" />
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:onClick="showDatePicker"
+                                android:id="@+id/rgs_tglLahir"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="#ffff"
+                                android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                                android:hint="Date Born"
+                                android:textColor="@color/black"
+                                android:gravity="center_vertical"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
@@ -188,6 +193,8 @@
                             android:inputType="textPassword"
                             android:textColor="#fff"
                             android:textColorHint="#fff"
+                            android:focusable="true"
+                            android:clickable="true"
                             android:textSize="16sp" />
                         />
                         <EditText
@@ -201,6 +208,8 @@
                             android:hint="Confrim Password"
                             android:singleLine="true"
                             android:textColor="#fff"
+                            android:focusable="true"
+                            android:clickable="true"
                             android:textColorHint="#fff"
                             android:textSize="16sp" />
 

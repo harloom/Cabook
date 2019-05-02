@@ -1,5 +1,7 @@
 package com.harloomdev.camerabooking.Activity.Register;
 
+import android.text.TextUtils;
+
 public class SignUp implements  IRegister{
     private String idktp;
     private String nama;
@@ -139,7 +141,10 @@ public class SignUp implements  IRegister{
 
 
     public boolean validConfimPassword(String password , String confpassword){
-        return password.equals(confimPassword);
+        if(TextUtils.isEmpty(password)){
+            return false;
+        }
+        return password.equals(confpassword);
 
     }
 

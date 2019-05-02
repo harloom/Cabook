@@ -8,12 +8,14 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
@@ -25,12 +27,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity implements IRegisterView {
+    private static final String TAG = "RegisterActivity";
     //var UI
     private EditText mIdKtp;
     private EditText mName;
     private EditText mAddress;
     private EditText mCity;
-    private EditText mDate;
+    private TextView mDate;
     private EditText mNoHp;
     private EditText mWork;
     private EditText mPassowrd;
@@ -77,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
         mProgressView = findViewById(R.id.register_progress);
         mRegFormView = findViewById(R.id.container_card);
 
-
         //function
         mBtnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +124,6 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
 
     }
     private void getCalendar(){
-        mDate.setOnClickListener(onDatePickerView);
-
         mCalendar = Calendar.getInstance();
         mOnDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -142,13 +142,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
         mDate.setText(sdf.format(mCalendar.getTime()));
 
     }
-    private View.OnClickListener onDatePickerView = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            new DatePickerDialog(v.getContext(),mOnDateSetListener,mCalendar.get(Calendar.YEAR),mCalendar.get(Calendar.MONTH),
-                    mCalendar.get(Calendar.DAY_OF_MONTH)).show();
-        }
-    } ;
+
 
     private void backLoginbtn() {
         findViewById(R.id.btnLogin).setOnClickListener(new View.OnClickListener() {
@@ -170,6 +164,8 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     @Override
     public void onRegisterError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Log.d(TAG,message);
+        showProgress(false);
     }
 
     @Override
@@ -208,5 +204,11 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mRegFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+    public void showDatePicker(View view) {
+        new DatePickerDialog(this,mOnDateSetListener,mCalendar.get(Calendar.YEAR),mCalendar.get(Calendar.MONTH),
+                mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
     }
 }
