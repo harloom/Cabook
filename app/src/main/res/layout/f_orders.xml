@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@drawable/bakground_login"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
@@ -32,6 +33,7 @@
 
     </androidx.cardview.widget.CardView>
 <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recy_fOrder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

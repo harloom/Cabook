@@ -23,28 +23,5 @@
     <include
         android:id="@+id/content_cek"
         layout="@layout/content_cek_acivity" />
-<LinearLayout
-    android:layout_gravity="bottom"
-    android:layout_width="match_parent"
-    android:background="@drawable/shadowtop"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="14sp"
-        android:text="12000"
-        android:layout_margin="5dp"
-        android:textColor="#000000"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Order"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"/>
-</LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

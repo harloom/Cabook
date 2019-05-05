@@ -11,15 +11,17 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.harloomdev.camerabooking.Http.conf.API.Client.LoginClient;
-import com.harloomdev.camerabooking.Http.conf.API.Interfaces.Server;
+import com.harloomdev.camerabooking.Activity.Register.RegisterActivity;
+import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
+import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,18 +75,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton mEmailSignInButton = (FloatingActionButton) findViewById(R.id.btnLogin);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        FloatingActionButton mSignInButton = (FloatingActionButton) findViewById(R.id.btnLogin);
+        mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
         });
 
+
+        findViewById(R.id.labelLogin).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  =new Intent(getBaseContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
         findViewById(R.id.btnRegister).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent  =new Intent(getBaseContext(),MainActivity.class);
+                Intent intent  =new Intent(getBaseContext(),RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -133,8 +143,8 @@ public class LoginActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            Server serverLogin = LoginClient.getLoginClient().create(Server.class);
-            Call<KeyAPI> call = serverLogin.postLogin(id, password);
+            TaskServiceAPI taskServiceAPILogin = APIClient.createService().create(TaskServiceAPI.class);
+            Call<KeyAPI> call = taskServiceAPILogin.postLogin(id, password);
             call.enqueue(new Callback<KeyAPI>() {
                 @Override
                 public void onResponse(@NonNull Call<KeyAPI> call, @NonNull Response<KeyAPI> response) {
@@ -143,6 +153,8 @@ public class LoginActivity extends AppCompatActivity {
                                 , Toast.LENGTH_SHORT).show();
 
                     } else {
+                        ResponOther error = ErrorAPIUtils.parseError(response);
+                        Toast.makeText(LoginActivity.this, error.getStatusCode() +":" +error.getMassage(), Toast.LENGTH_SHORT).show();
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
                         mPasswordView.requestFocus();
                     }
@@ -170,6 +182,8 @@ public class LoginActivity extends AppCompatActivity {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
+
+
 
     /**
      * Shows the progress UI and hides the login form.
