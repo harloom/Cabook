@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 
 import java.util.ArrayList;
@@ -32,11 +33,11 @@ public interface TaskServiceAPI {
     //registrasi
     @FormUrlEncoded
     @POST("register")
-    Call<ResponseBody> postSignUp (@Field("id_ktp") String _idktp, @Field("nama") String _nama ,
-                                   @Field("alamat") String _alamat,@Field("no_handphone") String _noHp,
-                                   @Field("pekerjaan") String _pekerjaan , @Field("jenis_kelamin") String _jenisKelamin,
-                                   @Field("tanggal_lahir") String _tanggalLahir ,@Field("tempat_lahir") String _tempatlahir,
-                                   @Field("password") String _password);
+    Call<ResponOther> postSignUp (@Field("id_ktp") String _idktp, @Field("nama") String _nama ,
+                                  @Field("alamat") String _alamat, @Field("no_handphone") String _noHp,
+                                  @Field("pekerjaan") String _pekerjaan , @Field("jenis_kelamin") String _jenisKelamin,
+                                  @Field("tanggal_lahir") String _tanggalLahir , @Field("tempat_lahir") String _tempatlahir,
+                                  @Field("password") String _password);
 
 
 
