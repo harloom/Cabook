@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.harloomdev.camerabooking.Activity.CekAcivity;
-import com.harloomdev.camerabooking.Activity.ProductActivity;
+import com.harloomdev.camerabooking.Activity.Product.ProductActivity;
 import com.harloomdev.camerabooking.R;
 
 import androidx.annotation.NonNull;

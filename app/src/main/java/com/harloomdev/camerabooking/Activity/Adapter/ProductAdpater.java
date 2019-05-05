@@ -41,7 +41,6 @@ public class ProductAdpater extends RecyclerView.Adapter<ProductAdpater.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder v, int i) {
         Products item = arrayList.get(i);
-
         Glide.with(context).load(item.getUrlImage()).
                 into(v.v_imgProduct);
         v.v_nameProduct.setText(item.getNamaKamera());

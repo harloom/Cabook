@@ -14,5 +14,7 @@ public final class Server {
     public static final String BASE_URL_DeleteChartALL= BASE_URL+"charts/all";
 
 
+    public static final String fileKey = "com.harloom.cabook.loginLog";
+
 
 }

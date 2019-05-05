@@ -6,6 +6,7 @@ import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -44,7 +45,7 @@ public interface TaskServiceAPI {
     //get products
     @Headers("Content-Type: application/json")
     @GET("data/products")
-    Call<ArrayList<Products>> getProducts();
+    Call<List<Products>> getProducts();
 
     //viewKwitansi
 
