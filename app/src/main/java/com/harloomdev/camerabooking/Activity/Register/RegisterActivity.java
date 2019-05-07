@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     //calender
     private Calendar mCalendar;
     private DatePickerDialog.OnDateSetListener mOnDateSetListener;
-    //Presenter
+    //Preferences
     RegisterPresenter registerPresenter ;
 
 

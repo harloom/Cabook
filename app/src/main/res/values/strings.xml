@@ -40,4 +40,8 @@
 
     </string-array>
 
+    <string name="developer">Developer</string>
+    <string name="harloom">Harloom (FullStack Developer)</string>
+
+
 </resources>

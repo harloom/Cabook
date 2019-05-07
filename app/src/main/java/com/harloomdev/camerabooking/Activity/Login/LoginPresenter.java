@@ -12,6 +12,7 @@ import com.harloomdev.camerabooking.Http.conf.Server;
 import com.harloomdev.camerabooking.LoginActivity;
 import com.harloomdev.camerabooking.R;
 import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
+import com.harloomdev.camerabooking.Utils.Preferences;
 
 import androidx.annotation.NonNull;
 import retrofit2.Call;
@@ -30,8 +31,7 @@ public class LoginPresenter implements IloginPresenter {
 
     @Override
     public void sendAPI(final Mlogin mlogin){
-        SharedPreferences mSharedPreferences = context.getSharedPreferences(Server.fileKey, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor prEditor = mSharedPreferences.edit();
+        final Preferences preferences = new Preferences(context);
 
         TaskServiceAPI taskServiceAPILogin = APIClient.createService().create(TaskServiceAPI.class);
         Call<KeyAPI> call = taskServiceAPILogin.postLogin(mlogin.getId_ktp(), mlogin.getPassword());
@@ -40,9 +40,14 @@ public class LoginPresenter implements IloginPresenter {
             public void onResponse(@NonNull Call<KeyAPI> call, @NonNull Response<KeyAPI> response) {
                 if (response.code() == 200) {
                     iloginView.onLoginSuccess(response.body());
-                    prEditor.putString("id_ktp",mlogin.getId_ktp());
-                    prEditor.putString("key_api",response.body().getKeyAPI().toString());
-                    prEditor.apply();
+//                    prEditor.putString("id_ktp",mlogin.getId_ktp());
+//                    prEditor.putString("key_api",response.body().getKeyAPI().toString());
+//                    prEditor.apply();
+
+                        preferences.saveIdKTP(mlogin.getId_ktp());
+                        preferences.savekeyAPI(response.body().getKeyAPI().toString());
+                        preferences.saveStatus(true);
+
 
                 } else {
                     ResponOther error = ErrorAPIUtils.parseError(response);
