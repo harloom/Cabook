@@ -26,6 +26,7 @@ import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
+import com.harloomdev.camerabooking.Utils.Preferences;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -69,6 +70,18 @@ public class LoginActivity extends AppCompatActivity  implements IloginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+
+        //if login true
+        if(new Preferences(this).getStatus()){
+            startActivity(new Intent(this,MainActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+            ));
+            finish();
+        }
+
+
+
         loginPresenter = new LoginPresenter(this,this);
         // Set up the login form.
         mId = (EditText) findViewById(R.id.id_ktp);
@@ -194,6 +207,8 @@ public class LoginActivity extends AppCompatActivity  implements IloginView {
 
     @Override
     public void onLoginSuccess(KeyAPI respon) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
         Toast.makeText(this, respon.getKeyAPI()
                 , Toast.LENGTH_SHORT).show();
         showProgress(false);

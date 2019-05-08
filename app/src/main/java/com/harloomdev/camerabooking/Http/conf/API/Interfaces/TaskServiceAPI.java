@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
+import com.harloomdev.camerabooking.Http.conf.API.Model.Profile.Profile;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 
@@ -40,7 +41,10 @@ public interface TaskServiceAPI {
                                   @Field("tanggal_lahir") String _tanggalLahir , @Field("tempat_lahir") String _tempatlahir,
                                   @Field("password") String _password);
 
-
+    //profile
+    @Headers("Content-Type: application/json")
+    @GET("data/profile")
+    Call<Profile> getProfile(@Query("id_ktp") String _idktp);
 
     //get products
     @Headers("Content-Type: application/json")
@@ -51,6 +55,8 @@ public interface TaskServiceAPI {
 
     @GET("kwintasi/{id_ktp}")
     Call<ArrayList<ViewKwitansi>> getViewKwitansi(@HeaderMap Map<String,String> headers, @Path("id_ktp") String _idKTP);
+
+
 
 
 }

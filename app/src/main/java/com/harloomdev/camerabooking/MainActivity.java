@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.harloomdev.camerabooking.Fragment.AccountFragment;
+import com.harloomdev.camerabooking.Fragment.Account.AccountFragment;
 import com.harloomdev.camerabooking.Fragment.HomeFragment;
 import com.harloomdev.camerabooking.Fragment.OrdersFragment;
 
@@ -16,16 +16,11 @@ import androidx.fragment.app.Fragment;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadFragment(new HomeFragment());
-
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
 
@@ -52,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-
                 fragment = new HomeFragment();
 //                    item.setChecked(true);
                 break;
