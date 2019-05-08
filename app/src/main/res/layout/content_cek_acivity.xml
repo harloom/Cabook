@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activity.CekAcivity"
+    tools:context=".Activity.Chart.CekAcivity"
     tools:showIn="@layout/activity_cek_acivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,9 +110,9 @@
                                 android:gravity="left"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="No"
+                                android:text="No KTP"
                                 android:textStyle="bold"
-                                android:textColor="@color/black"
+
                                 android:textSize="14sp"
                                 />
                             <TextView
@@ -123,36 +123,11 @@
                                 android:layout_height="wrap_content"
                                 android:text="K0005"
                                 android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_weight="3"
-                                android:gravity="left"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Nama"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                />
-                            <TextView
 
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Harloom"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
                                 android:textSize="14sp"
                                 />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -194,12 +169,12 @@
                                 android:textSize="14sp"
                                 />
                             <TextView
-
+                                android:id="@+id/txt_totalbayar"
                                 android:layout_weight="1"
                                 android:gravity="right"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Rp. 12000"
+                                android:text="Rp. 0"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
@@ -217,6 +192,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@id/txt_totalbayar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.R;
 
@@ -37,12 +38,11 @@ public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder v, int i) {
         Chart item = arrayList;
 
-//        Glide.with(context).load(item.getUrlImage()).
-//                into(v.v_imgProduct);
+        Glide.with(context).load(item.getRecordset().get(i).getIdKamera()).
+                into(v.v_imgProduct);
         v.v_nameProduct.setText(item.getRecordset().get(i).getNama());
         v.v_hargaProduct.setText("Rp. "+item.getRecordset().get(i).getHarga());
         v.v_count.setText(item.getRecordset().get(i).getJumlahPinjam().toString());
-
 
 
     }
