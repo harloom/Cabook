@@ -13,6 +13,8 @@ public final class Server {
     public static final String BASE_URL_Chart= BASE_URL+"charts/"; // post/ get,put,delete
     public static final String BASE_URL_DeleteChartALL= BASE_URL+"charts/all";
 
+    public static final String BASE_URL_IMAGE = BASE_URL+"file/img/";
+
 
     public static final String fileKey = "com.harloom.cabook.loginLog";
 

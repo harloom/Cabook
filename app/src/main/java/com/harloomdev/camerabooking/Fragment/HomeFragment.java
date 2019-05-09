@@ -1,5 +1,6 @@
 package com.harloomdev.camerabooking.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment implements IProfileView {
-
+    private Context context;
     private TextView main_nametxt;
 
     @Nullable
@@ -36,7 +37,7 @@ public class HomeFragment extends Fragment implements IProfileView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         main_nametxt = view.findViewById(R.id.main_name);
-
+        context = view.getContext();
 
         view.findViewById(R.id.btn_menuProduct).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,18 +90,24 @@ public class HomeFragment extends Fragment implements IProfileView {
 
     @Override
     public void onGetResourceSuccess(Profile data) {
-        main_nametxt.setText(data.getNama());
+        if(context!=null){
+            main_nametxt.setText(data.getNama());
+        }
 
     }
 
     @Override
     public void onGetResourceError(String massage) {
-        Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
+        if(context!=null){
+            Toast.makeText(context, massage, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     public void onAPIError(ResponOther error) {
-        Toast.makeText(getContext(), error.getStatusCode() + " : "+ error.getMassage(), Toast.LENGTH_SHORT).show();
-
+        if(context!=null) {
+            Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

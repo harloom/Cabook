@@ -38,16 +38,14 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        initRecyleView();
+        productPresenter.getDataAPI();
 
     }
 
 
 
     private void initRecyleView(){
-        productPresenter.getDataAPI();
-        Products product3 = new Products("C0003","Cannon C3",323000,10,R.drawable.image1,"Unit");
-        mArray.add(product3);
+
         GridLayoutManager gridLayoutManager  = new GridLayoutManager(context, 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mAdapter = new ProductAdpater(context,mArray,this);
@@ -74,6 +72,7 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
     @Override
     public void onGetResourceSuccess(List<Products> products) {
         mArray.addAll(products);
+        initRecyleView();
         mAdapter.notifyDataSetChanged();
 
     }

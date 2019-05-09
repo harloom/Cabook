@@ -1,19 +1,21 @@
 package com.harloomdev.camerabooking.Activity.Chart;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.harloomdev.camerabooking.Activity.Adapter.ChartAdpater;
 import com.harloomdev.camerabooking.Activity.Adapter.OnChartClickListener;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
-import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset_;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.R;
 import com.harloomdev.camerabooking.Utils.Preferences;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,27 +23,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CekAcivity extends AppCompatActivity implements OnChartClickListener , ICekView {
+public class CekAcivity extends AppCompatActivity implements OnChartClickListener ,AdapterView.OnItemSelectedListener, ICekView {
     private RecyclerView recyclerView ;
     private ChartAdpater chartAdpater ;
     private IChartPresenter iChartPresenter ;
     private Preferences preferences;
     private Chart chart  ;
+    private String id_service = "";
 
     //UI Decraltion
     private TextView no;
-    private TextView txt_totalbayar;
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Preferences preferences = new Preferences(this);
-        if(preferences.getStatus()){
-            iChartPresenter.getChart(preferences.getIDKTP(),preferences.getKeyAPI());
-        }else{
-            Toast.makeText(this, "Dih ada Hekel", Toast.LENGTH_SHORT).show();
-        }
+    private TextView txt_totalbayar , txt_ppn;
+    private Spinner spinner;
 
-    }
+
+
 
 
     @Override
@@ -53,6 +49,13 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         initUI();
 //        initRecyview();
 
+        Preferences preferences = new Preferences(this);
+        if(preferences.getStatus()){
+            iChartPresenter.getChart(preferences.getIDKTP(),preferences.getKeyAPI());
+        }else{
+            Toast.makeText(this, "Dih ada Hekel", Toast.LENGTH_SHORT).show();
+        }
+
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -62,12 +65,17 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     private void initUI(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.recy_chart) ;
+        spinner = (Spinner) findViewById(R.id.spiner_service);
+
         no = findViewById(R.id.no_txt);
         txt_totalbayar =  findViewById(R.id.txt_totalbayar);
+        txt_ppn = findViewById(R.id.ppn_txt);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        iChartPresenter.getService();
+        spinner.setOnItemSelectedListener(this);
     }
 
 //    private void getData(){
@@ -94,10 +102,11 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         jumlah_awal  = chart.getRecordset().get(position).getJumlahPinjam();
         jumlah_awal += 1;
         chart.getRecordset().get(position).setJumlahPinjam(jumlah_awal);
+        chartAdpater.notifyDataSetChanged();
         PutChart data  = new PutChart(preferences.getKeyAPI(),preferences.getIDKTP(),
-                chart.getRecordset().get(position).getIdKamera(),chart.getRecordset().get(position).getJumlahPinjam().toString());
-        iChartPresenter.putEdit(data);
-
+                chart.getRecordset().get(position).getIdKamera(),chart.getRecordset().get(position).getJumlahPinjam().toString(),
+                chart.getRecordset().get(position).getId_service());
+            send(data);
 
     }
 
@@ -106,18 +115,29 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         jumlah_awal  = chart.getRecordset().get(position).getJumlahPinjam();
         jumlah_awal -= 1;
         chart.getRecordset().get(position).setJumlahPinjam(jumlah_awal);
+        chartAdpater.notifyDataSetChanged();
         PutChart data  = new PutChart(preferences.getKeyAPI(),preferences.getIDKTP(),
-                chart.getRecordset().get(position).getIdKamera(),chart.getRecordset().get(position).getJumlahPinjam().toString());
-        iChartPresenter.putEdit(data);
+                chart.getRecordset().get(position).getIdKamera(),chart.getRecordset().get(position).getJumlahPinjam().toString(),
+                chart.getRecordset().get(position).getId_service());
+        send(data);
+    }
+    private void send (final PutChart putChart){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                iChartPresenter.putEdit(putChart);
+            }
+        },500);
 
     }
+
+
 
     @Override
     public void onGetResourceSuccess(Chart charts) {
         chart  = charts;
         initRecyview();
-        no.setText(preferences.getIDKTP());
-        txt_totalbayar.setText("RP. "+ chart.getTotalBayar());
+        initDataUI();
 
     }
 
@@ -135,7 +155,9 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     @Override
     public void onEditSucces(Chart _chart) {
         chart = _chart;
-        chartAdpater.notifyDataSetChanged();
+        initRecyview();
+        initDataUI();
+
 
     }
 
@@ -148,4 +170,46 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     public void onSystemError(String massage) {
         Toast.makeText(this, massage, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onGetServiceSuccess(List<ServiceChart> serviceChart) {
+        ArrayAdapter<ServiceChart> adapter =
+                new ArrayAdapter<ServiceChart>(this, R.layout.support_simple_spinner_dropdown_item, serviceChart);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+          ServiceChart serviceChart = (ServiceChart) parent.getSelectedItem();
+          setDataService(serviceChart.getIdService());
+          Toast.makeText(this, serviceChart.getNamaPelayanan(), Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void setDataService(String id_service){
+        for(int i  = 0 ;i<chart.getRecordset().size();i++){
+            chart.getRecordset().get(i).setId_service(id_service);
+            PutChart data =  new PutChart(preferences.getKeyAPI(),preferences.getIDKTP(),
+                    chart.getRecordset().get(i).getIdKamera(),chart.getRecordset().get(i).getJumlahPinjam().toString(),
+                    chart.getRecordset().get(i).getId_service());
+            send(data);
+        }
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private void initDataUI(){
+        no.setText(preferences.getIDKTP());
+        txt_totalbayar.setText("RP. " + chart.getTotalBayar());
+        txt_ppn.setText("Rp. " +  chart.getTotalPajak());
+    }
+
+
 }

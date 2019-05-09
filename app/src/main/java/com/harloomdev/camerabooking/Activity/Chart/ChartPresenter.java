@@ -49,20 +49,43 @@ public class ChartPresenter implements  IChartPresenter {
     @Override
     public void putEdit(PutChart putChart) {
         Call<Chart> call = taskServiceAPI.editChart(putChart.getKey(),putChart.getId_kamera(),putChart.getIdKtp(),
-                            putChart.getJumlah());
+                            putChart.getJumlah(),putChart.getService());
         call.enqueue(new Callback<Chart>() {
             @Override
             public void onResponse(Call<Chart> call, Response<Chart> response) {
                 if(response.isSuccessful()){
-
+                    iCekView.onEditSucces(response.body());
+                }else{
+                    ResponOther mError = ErrorAPIUtils.parseError(response);
+                    iCekView.onEditRequestError(mError);
                 }
+
             }
 
             @Override
             public void onFailure(Call<Chart> call, Throwable t) {
-
+                iCekView.onSystemError(t.getMessage());
             }
         });
 
+    }
+
+    @Override
+    public void getService() {
+        Call<List<ServiceChart>> call = taskServiceAPI.getService();
+        call.enqueue(new Callback<List<ServiceChart>>() {
+            @Override
+            public void onResponse(Call<List<ServiceChart>> call, Response<List<ServiceChart>> response) {
+                if(response.isSuccessful()){
+                    iCekView.onGetServiceSuccess(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ServiceChart>> call, Throwable t) {
+                    iCekView.onGetResourceError(t.getMessage());
+            }
+        });
     }
 }

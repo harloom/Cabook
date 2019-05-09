@@ -1,5 +1,6 @@
 package com.harloomdev.camerabooking.Fragment.Account;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class AccountFragment extends Fragment implements IProfileView {
+    private Context context;
+
     private TextView mNameProfile;
     private TextView mTextMessage;
     private ProfilePresenter mpPresenter;
@@ -33,7 +36,7 @@ public class AccountFragment extends Fragment implements IProfileView {
         mTextMessage = (TextView) view.findViewById(R.id.message);
         mTextMessage.setText(R.string.title_profile);
         mNameProfile = (TextView) view.findViewById(R.id.profile_nama) ;
-
+        context = view.getContext();
 
 
         //presenter
@@ -71,16 +74,25 @@ public class AccountFragment extends Fragment implements IProfileView {
 
     @Override
     public void onGetResourceSuccess(Profile data) {
-        mNameProfile.setText(data.getNama());
+        if(context!=null){
+            mNameProfile.setText(data.getNama());
+        }
+
     }
 
     @Override
     public void onGetResourceError(String massage) {
-        Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
+        if(context!=null){
+            Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     public void onAPIError(ResponOther error) {
-        Toast.makeText(getContext(),error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+        if(context!=null){
+            Toast.makeText(getContext(),error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

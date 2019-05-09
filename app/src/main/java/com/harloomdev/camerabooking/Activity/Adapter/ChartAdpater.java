@@ -2,6 +2,8 @@ package com.harloomdev.camerabooking.Activity.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
+import com.harloomdev.camerabooking.Http.conf.Server;
 import com.harloomdev.camerabooking.R;
 
 import androidx.annotation.NonNull;
@@ -37,8 +40,8 @@ public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder v, int i) {
         Chart item = arrayList;
-
-        Glide.with(context).load(item.getRecordset().get(i).getIdKamera()).
+        Log.d("Log : ",item.getRecordset().get(i).getJumlahPinjam().toString());
+        Glide.with(context).load(Server.BASE_URL_IMAGE+item.getRecordset().get(i).getUrlImage()).
                 into(v.v_imgProduct);
         v.v_nameProduct.setText(item.getRecordset().get(i).getNama());
         v.v_hargaProduct.setText("Rp. "+item.getRecordset().get(i).getHarga());
@@ -49,7 +52,7 @@ public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return arrayList.getRecordset().size();
+        return  arrayList.getRecordset()!=null ? arrayList.getRecordset().size():0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder   {

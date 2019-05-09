@@ -8,12 +8,14 @@ public class PutChart implements Parcelable {
     private String idKtp;
     private String id_kamera;
     private String jumlah;
+    private String service;
 
-    public PutChart(String key, String idKtp, String id_kamera, String jumlah) {
+    public PutChart(String key, String idKtp, String id_kamera, String jumlah, String service) {
         this.key = key;
         this.idKtp = idKtp;
         this.id_kamera = id_kamera;
         this.jumlah = jumlah;
+        this.service = service;
     }
 
     public PutChart() {
@@ -51,6 +53,14 @@ public class PutChart implements Parcelable {
         this.jumlah = jumlah;
     }
 
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
     @Override
     public String toString() {
         return "PutChart{" +
@@ -58,6 +68,7 @@ public class PutChart implements Parcelable {
                 ", idKtp='" + idKtp + '\'' +
                 ", id_kamera='" + id_kamera + '\'' +
                 ", jumlah='" + jumlah + '\'' +
+                ", service='" + service + '\'' +
                 '}';
     }
 
@@ -73,6 +84,7 @@ public class PutChart implements Parcelable {
         dest.writeString(this.idKtp);
         dest.writeString(this.id_kamera);
         dest.writeString(this.jumlah);
+        dest.writeString(this.service);
     }
 
     protected PutChart(Parcel in) {
@@ -80,9 +92,10 @@ public class PutChart implements Parcelable {
         this.idKtp = in.readString();
         this.id_kamera = in.readString();
         this.jumlah = in.readString();
+        this.service = in.readString();
     }
 
-    public static final Parcelable.Creator<PutChart> CREATOR = new Parcelable.Creator<PutChart>() {
+    public static final Creator<PutChart> CREATOR = new Creator<PutChart>() {
         @Override
         public PutChart createFromParcel(Parcel source) {
             return new PutChart(source);

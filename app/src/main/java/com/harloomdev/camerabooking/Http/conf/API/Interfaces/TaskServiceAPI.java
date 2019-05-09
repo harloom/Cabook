@@ -1,5 +1,6 @@
 package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 
+import com.harloomdev.camerabooking.Activity.Chart.ServiceChart;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
@@ -53,10 +54,10 @@ public interface TaskServiceAPI {
     @GET("data/products")
     Call<List<Products>> getProducts();
 
-//    //get Sevice
-//    @Headers("Content-Type: application/json")
-//    @GET("data/products")
-//    Call<List<String>> getServuce();
+    //get Sevice
+    @Headers("Content-Type: application/json")
+    @GET("data/services")
+    Call<List<ServiceChart>> getService();
 
     //getChart
     @GET("charts/")
@@ -64,7 +65,8 @@ public interface TaskServiceAPI {
     @FormUrlEncoded
     @PUT("charts/")
     Call<Chart> editChart (@Header("key_api") String key ,@Field("id_kamera") String idkamera,
-                                      @Field("id_ktp") String id_ktp,@Field("jumlah") String jumlah);
+                                      @Field("id_ktp") String id_ktp,@Field("jumlah") String jumlah,
+                           @Field("service") String idsevice);
 
 
     //viewKwitansi

@@ -23,12 +23,12 @@ public class Products implements Parcelable {
     private Integer stok;
     @SerializedName("url_image")
     @Expose
-    private int urlImage;
+    private String urlImage;
     @SerializedName("satuan")
     @Expose
     private String satuan;
 
-    public Products(String idKamera, String namaKamera, Integer harga, Integer stok, int urlImage, String satuan) {
+    public Products(String idKamera, String namaKamera, Integer harga, Integer stok, String urlImage, String satuan) {
         this.idKamera = idKamera;
         this.namaKamera = namaKamera;
         this.harga = harga;
@@ -50,7 +50,7 @@ public class Products implements Parcelable {
         } else {
             stok = in.readInt();
         }
-        urlImage = in.readInt();
+        urlImage = in.readString();
         satuan = in.readString();
     }
 
@@ -98,11 +98,11 @@ public class Products implements Parcelable {
         this.stok = stok;
     }
 
-    public int getUrlImage() {
+    public String getUrlImage() {
         return urlImage;
     }
 
-    public void setUrlImage(int urlImage) {
+    public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
 
@@ -147,7 +147,7 @@ public class Products implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeInt(stok);
         }
-        parcel.writeInt(urlImage);
+        parcel.writeString(urlImage);
         parcel.writeString(satuan);
     }
 }

@@ -1,6 +1,7 @@
 package com.harloomdev.camerabooking.Activity.Product;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
@@ -17,7 +18,7 @@ import retrofit2.Response;
 public class ProductPresenter  implements  IProductPresenter{
     private Context context;
     private IProductView  mIProductView;
-
+    private static final String  TAG="Product Presenter";
     public ProductPresenter(Context context, IProductView mIProductView) {
         this.context = context;
         this.mIProductView = mIProductView;
@@ -33,6 +34,7 @@ public class ProductPresenter  implements  IProductPresenter{
             @Override
             public void onResponse(Call<List<Products>> call, Response<List<Products>> response) {
                 if(response.isSuccessful()){
+                    Log.d(TAG, response.body().toString());
                     mIProductView.onGetResourceSuccess(response.body());
                 }else{
                     ResponOther error = ErrorAPIUtils.parseError(response);
