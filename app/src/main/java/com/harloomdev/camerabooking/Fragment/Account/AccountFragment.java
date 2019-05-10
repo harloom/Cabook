@@ -19,7 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class AccountFragment extends Fragment implements IProfileView {
-    private Context context;
+    private Context context = null;
 
     private TextView mNameProfile;
     private TextView mTextMessage;
@@ -83,7 +83,7 @@ public class AccountFragment extends Fragment implements IProfileView {
     @Override
     public void onGetResourceError(String massage) {
         if(context!=null){
-            Toast.makeText(getContext(), massage, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, massage, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -91,7 +91,7 @@ public class AccountFragment extends Fragment implements IProfileView {
     @Override
     public void onAPIError(ResponOther error) {
         if(context!=null){
-            Toast.makeText(getContext(),error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
         }
 
     }

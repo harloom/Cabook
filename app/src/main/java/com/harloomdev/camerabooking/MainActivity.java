@@ -6,7 +6,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.harloomdev.camerabooking.Fragment.Account.AccountFragment;
 import com.harloomdev.camerabooking.Fragment.HomeFragment;
-import com.harloomdev.camerabooking.Fragment.OrdersFragment;
+import com.harloomdev.camerabooking.Fragment.Orders.OrdersFragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

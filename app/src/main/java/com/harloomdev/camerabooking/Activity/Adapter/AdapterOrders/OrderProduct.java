@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
+import com.harloomdev.camerabooking.Http.conf.Server;
 import com.harloomdev.camerabooking.R;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class OrderProduct extends RecyclerView.Adapter<OrderProduct.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Detail detail = details.get(position);
-        Glide.with(context).load(detail.getUrlImage()).into(holder.o_imgProduct);
+        Glide.with(context).load(Server.BASE_URL_IMAGE+detail.getUrlImage()).into(holder.o_imgProduct);
         holder.o_txtNamaBarang.setText(detail.getNamaKamera());
         holder.o_txtUnit.setText(detail.getJumlahPinjam() + " Unit");
         holder.o_txtHargaBarang.setText("Rp. "+detail.getHarga());

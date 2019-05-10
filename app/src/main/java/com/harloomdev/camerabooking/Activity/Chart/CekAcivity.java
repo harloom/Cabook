@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.harloomdev.camerabooking.Activity.Adapter.ChartAdpater;
 import com.harloomdev.camerabooking.Activity.Adapter.OnChartClickListener;
+import com.harloomdev.camerabooking.Activity.Adapter.ServiceAdapter;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.R;
@@ -75,7 +76,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         iChartPresenter.getService();
-        spinner.setOnItemSelectedListener(this);
+
     }
 
 //    private void getData(){
@@ -173,14 +174,17 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
     @Override
     public void onGetServiceSuccess(List<ServiceChart> serviceChart) {
-        ArrayAdapter<ServiceChart> adapter =
-                new ArrayAdapter<ServiceChart>(this, R.layout.support_simple_spinner_dropdown_item, serviceChart);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        ServiceAdapter adapter = new ServiceAdapter(this,serviceChart);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        if(chart.getRecordset() == null){
+            return;
+        }
           ServiceChart serviceChart = (ServiceChart) parent.getSelectedItem();
           setDataService(serviceChart.getIdService());
           Toast.makeText(this, serviceChart.getNamaPelayanan(), Toast.LENGTH_SHORT).show();

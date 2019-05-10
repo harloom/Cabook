@@ -37,12 +37,12 @@ public class Detail  implements Parcelable {
     private Integer totalBayar;
     @SerializedName("url_image")
     @Expose
-    private Integer urlImage;
+    private String urlImage;
     @SerializedName("satuan")
     @Expose
     private String satuan;
 
-    public Detail(String noKwitansi, String idKamera, String namaKamera, Integer harga, Integer jumlahPinjam, Double ppn, Integer total, Integer pajak, Integer totalBayar, Integer urlImage, String satuan) {
+    public Detail(String noKwitansi, String idKamera, String namaKamera, Integer harga, Integer jumlahPinjam, Double ppn, Integer total, Integer pajak, Integer totalBayar, String urlImage, String satuan) {
         this.noKwitansi = noKwitansi;
         this.idKamera = idKamera;
         this.namaKamera = namaKamera;
@@ -128,11 +128,11 @@ public class Detail  implements Parcelable {
         this.totalBayar = totalBayar;
     }
 
-    public Integer getUrlImage() {
+    public String getUrlImage() {
         return urlImage;
     }
 
-    public void setUrlImage(Integer urlImage) {
+    public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
 
