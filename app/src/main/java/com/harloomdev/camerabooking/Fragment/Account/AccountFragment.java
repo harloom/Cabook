@@ -1,7 +1,6 @@
-package com.harloomdev.camerabooking.Fragment;
+package com.harloomdev.camerabooking.Fragment.Account;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harloomdev.camerabooking.Activity.Chart.CekAcivity;
-import com.harloomdev.camerabooking.Activity.Product.ProductActivity;
-import com.harloomdev.camerabooking.Fragment.Account.IProfileView;
-import com.harloomdev.camerabooking.Fragment.Account.ProfilePresenter;
+import com.harloomdev.camerabooking.Activity.Product.IProductView;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Profile.Profile;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.R;
@@ -22,44 +18,32 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class HomeFragment extends Fragment implements IProfileView {
-    private Context context;
-    private TextView main_nametxt;
+public class AccountFragment extends Fragment implements IProfileView {
+    private Context context = null;
 
+    private TextView mNameProfile;
+    private TextView mTextMessage;
+    private ProfilePresenter mpPresenter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.f_home,container,false
-        );
+        return  inflater.inflate(R.layout.f_account,container,false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        main_nametxt = view.findViewById(R.id.main_name);
+        mTextMessage = (TextView) view.findViewById(R.id.message);
+        mTextMessage.setText(R.string.title_profile);
+        mNameProfile = (TextView) view.findViewById(R.id.profile_nama) ;
         context = view.getContext();
-
-        view.findViewById(R.id.btn_menuProduct).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext() , ProductActivity.class);
-                startActivity(intent);
-            }
-        });
-        view.findViewById(R.id.btn_chart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext() , CekAcivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         //presenter
-        ProfilePresenter presenter = new ProfilePresenter(view.getContext(), this);
-        Preferences preferences  = new Preferences(view.getContext());
+        mpPresenter = new ProfilePresenter(view.getContext(),this);
+        Preferences preferences = new Preferences(view.getContext());
         String s  = preferences.getIDKTP();
-        presenter.getAPIData(s);
+        mpPresenter.getAPIData(s);
 
     }
 
@@ -91,7 +75,7 @@ public class HomeFragment extends Fragment implements IProfileView {
     @Override
     public void onGetResourceSuccess(Profile data) {
         if(context!=null){
-            main_nametxt.setText(data.getNama());
+            mNameProfile.setText(data.getNama());
         }
 
     }
@@ -106,8 +90,9 @@ public class HomeFragment extends Fragment implements IProfileView {
 
     @Override
     public void onAPIError(ResponOther error) {
-        if(context!=null) {
-            Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+        if(context!=null){
+            Toast.makeText(context,error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
         }
+
     }
 }

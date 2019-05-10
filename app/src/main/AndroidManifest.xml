@@ -30,11 +30,11 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main" />
         <activity
-            android:name=".Activity.ProductActivity"
+            android:name=".Activity.Product.ProductActivity"
             android:label="@string/title_activity_product"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Activity.CekAcivity"
+            android:name=".Activity.Chart.CekAcivity"
             android:label="@string/title_activity_cek_acivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activity.Register.RegisterActivity"></activity>

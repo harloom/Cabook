@@ -9,11 +9,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 import com.harloomdev.camerabooking.R;
 import com.ramotion.foldingcell.FoldingCell;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,10 +50,33 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
         holder.mRecyleOrderBarang.setAdapter(mOrderProductAdapater);
         mOrderProductAdapater.notifyDataSetChanged();
 
-
+        holder.v_ttgl.setText(parseDate(mKwitansi.getTanggal()));
+        holder.v_ttglEx.setText(parseDate(mKwitansi.getTanggalExpire()));
+        holder.v_tnoKwitansi.setText(mKwitansi.getNoKwitansi());
+        holder.v_tnamaOrder.setText(mKwitansi.getNama());
+        holder.v_talamatAntar.setText(mKwitansi.getAlamatAntar());
+        holder.v_tjenisService.setText(mKwitansi.getNamaPelayanan());
+        holder.v_ttxtTotal.setText("Rp. "+hitungTotal(mKwitansi.getDetail()));
         holder.v_ctxtTotal.setText("Arigataou :D");
 
+        holder.v_ctgl.setText(parseDate(mKwitansi.getTanggal()));
+        holder.v_ctglEx.setText(parseDate(mKwitansi.getTanggalExpire()));
+        holder.v_cnoKwitansi.setText(mKwitansi.getNoKwitansi());
+        holder.v_cnamaOrder.setText(mKwitansi.getNama());
+        holder.v_calamatAntar.setText(mKwitansi.getAlamatAntar());
+        holder.v_cjenisService.setText(mKwitansi.getNamaPelayanan());
+        holder.v_ctxtTotal.setText("Rp. "+hitungTotal(mKwitansi.getDetail()));
+        holder.v_ctxtTotalBayar.setText("Rp. "+hitungTotal(mKwitansi.getDetail()));
 
+
+    }
+    private Integer hitungTotal(List<Detail> details){
+        int jumlahtotal = 0;
+        for (Detail mdetail: details
+             ) {
+            jumlahtotal+=mdetail.getTotalBayar();
+        }
+        return jumlahtotal;
     }
 
     @Override
@@ -55,7 +84,19 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
         return null!=mViewKwitansis?mViewKwitansis.size():0;
     }
 
-
+    private String parseDate(String tanggal)
+    {
+   
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        Date date = null;
+        try {
+             date = sdf.parse(tanggal);
+          
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sdf.format(date);
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -107,6 +148,7 @@ public class OrderAdapter  extends RecyclerView.Adapter<OrderAdapter.ViewHolder>
             v_ctxtTotal = itemV.findViewById(R.id.ctxtTotal);
             v_ctxtTotalBayar = itemV.findViewById(R.id.ctxtTotalBayar);
             v_btnCancelOrder = itemV.findViewById(R.id.cbtn_cancelOrder);
+            v_cjenisService = itemV.findViewById(R.id.ctxt_jenisService);
             mRecyleOrderBarang = itemV.findViewById(R.id.recyleOrderBarang);
 
             //function

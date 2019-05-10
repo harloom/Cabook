@@ -55,24 +55,16 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             >
-            <Button
-                android:background="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Order"
-                android:textStyle="bold"
-                android:textColor="#ffff"
-                />
+
             <Button
                 android:id="@+id/btn_order"
-                android:background="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#ffff"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
+                style="@style/Widget.MaterialComponents.Button"
                 />
         </RelativeLayout>
 

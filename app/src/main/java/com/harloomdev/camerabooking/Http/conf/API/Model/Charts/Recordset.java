@@ -33,8 +33,14 @@ public class Recordset {
     @SerializedName("jumlah_bayar")
     @Expose
     private Integer jumlahBayar;
+    @SerializedName("id_service")
+    @Expose
+    private String id_service;
+    @SerializedName("pajak")
+    @Expose
+    private Integer pajak;
 
-    public Recordset(String idKtp, String idKamera, String namaKamera, Integer harga, Integer jumlahPinjam, String satuan, Object urlImage, String nama, Integer jumlahBayar) {
+    public Recordset(String idKtp, String idKamera, String namaKamera, Integer harga, Integer jumlahPinjam, String satuan, Object urlImage, String nama, Integer jumlahBayar, String id_service, Integer pajak) {
         this.idKtp = idKtp;
         this.idKamera = idKamera;
         this.namaKamera = namaKamera;
@@ -44,6 +50,8 @@ public class Recordset {
         this.urlImage = urlImage;
         this.nama = nama;
         this.jumlahBayar = jumlahBayar;
+        this.id_service = id_service;
+        this.pajak = pajak;
     }
 
     public Recordset() {
@@ -121,4 +129,19 @@ public class Recordset {
         this.jumlahBayar = jumlahBayar;
     }
 
+    public Integer getPajak() {
+        return pajak;
+    }
+
+    public void setPajak(Integer pajak) {
+        this.pajak = pajak;
+    }
+
+    public String getId_service() {
+        return id_service;
+    }
+
+    public void setId_service(String id_service) {
+        this.id_service = id_service;
+    }
 }
