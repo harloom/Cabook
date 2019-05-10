@@ -53,6 +53,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         Preferences preferences = new Preferences(this);
         if(preferences.getStatus()){
             iChartPresenter.getChart(preferences.getIDKTP(),preferences.getKeyAPI());
+
         }else{
             Toast.makeText(this, "Dih ada Hekel", Toast.LENGTH_SHORT).show();
         }
@@ -75,7 +76,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        iChartPresenter.getService();
+
 
     }
 
@@ -137,6 +138,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     @Override
     public void onGetResourceSuccess(Chart charts) {
         chart  = charts;
+        iChartPresenter.getService();
         initRecyview();
         initDataUI();
 
@@ -182,12 +184,12 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        if(chart.getRecordset() == null){
-            return;
+        if(chart.getRecordset()!=null){
+            ServiceChart serviceChart = (ServiceChart) parent.getSelectedItem();
+            setDataService(serviceChart.getIdService());
+            Toast.makeText(this, serviceChart.getNamaPelayanan(), Toast.LENGTH_SHORT).show();
         }
-          ServiceChart serviceChart = (ServiceChart) parent.getSelectedItem();
-          setDataService(serviceChart.getIdService());
-          Toast.makeText(this, serviceChart.getNamaPelayanan(), Toast.LENGTH_SHORT).show();
+
 
 
     }
