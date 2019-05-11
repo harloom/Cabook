@@ -26,14 +26,18 @@ public class Chart  {
     @SerializedName("total_bayar")
     @Expose
     private Integer totalBayar;
+    @SerializedName("total_pajak")
+    @Expose
+    private Integer totalPajak;
 
-    public Chart(List<List<Recordset>> recordsets, List<Recordset_> recordset, Output output, List<Integer> rowsAffected, Integer returnValue, Integer totalBayar) {
+    public Chart(List<List<Recordset>> recordsets, List<Recordset_> recordset, Output output, List<Integer> rowsAffected, Integer returnValue, Integer totalBayar, Integer totalPajak) {
         this.recordsets = recordsets;
         this.recordset = recordset;
         this.output = output;
         this.rowsAffected = rowsAffected;
         this.returnValue = returnValue;
         this.totalBayar = totalBayar;
+        this.totalPajak = totalPajak;
     }
 
     public Chart() {
@@ -88,4 +92,11 @@ public class Chart  {
         this.totalBayar = totalBayar;
     }
 
+    public Integer getTotalPajak() {
+        return totalPajak;
+    }
+
+    public void setTotalPajak(Integer totalPajak) {
+        this.totalPajak = totalPajak;
+    }
 }

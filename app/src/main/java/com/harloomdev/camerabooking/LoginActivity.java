@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,12 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.harloomdev.camerabooking.Activity.Login.IloginView;
+import com.harloomdev.camerabooking.Activity.Login.LoginPresenter;
+import com.harloomdev.camerabooking.Activity.Login.Mlogin;
 import com.harloomdev.camerabooking.Activity.Register.RegisterActivity;
 import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
+import com.harloomdev.camerabooking.Utils.Preferences;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +37,8 @@ import retrofit2.Response;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity  implements IloginView {
+    private SharedPreferences mSharedPreferences ;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -57,10 +63,26 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
 
+    private Mlogin mlogin = new Mlogin();
+    private LoginPresenter loginPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
+
+
+        //if login true
+        if(new Preferences(this).getStatus()){
+            startActivity(new Intent(this,MainActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+            ));
+            finish();
+        }
+
+
+
+        loginPresenter = new LoginPresenter(this,this);
         // Set up the login form.
         mId = (EditText) findViewById(R.id.id_ktp);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -68,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptLoginView();
                     return true;
                 }
                 return false;
@@ -79,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         mSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptLoginView();
             }
         });
 
@@ -104,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void attemptLogin() {
+    private void attemptLoginView() {
         if (mAuthTask != null) {
             return;
         }
@@ -119,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !mlogin.isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -129,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             mId.setError(getString(R.string.error_field_required));
             focusView = mId;
             cancel = true;
-        } else if (!isIdValid(id)) {
+        } else if (!mlogin.isIdValid(id)) {
             mId.setError(getString(R.string.error_invalid_email));
             focusView = mId;
             cancel = true;
@@ -143,51 +165,13 @@ public class LoginActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            TaskServiceAPI taskServiceAPILogin = APIClient.createService().create(TaskServiceAPI.class);
-            Call<KeyAPI> call = taskServiceAPILogin.postLogin(id, password);
-            call.enqueue(new Callback<KeyAPI>() {
-                @Override
-                public void onResponse(@NonNull Call<KeyAPI> call, @NonNull Response<KeyAPI> response) {
-                    if (response.code() == 200) {
-                        Toast.makeText(LoginActivity.this, response.body().getKeyAPI().toString()
-                                , Toast.LENGTH_SHORT).show();
+            mlogin.setId_ktp(id);
+            mlogin.setPassword(password);
+            loginPresenter.sendAPI(mlogin);
 
-                    } else {
-                        ResponOther error = ErrorAPIUtils.parseError(response);
-                        Toast.makeText(LoginActivity.this, error.getStatusCode() +":" +error.getMassage(), Toast.LENGTH_SHORT).show();
-                        mPasswordView.setError(getString(R.string.error_incorrect_password));
-                        mPasswordView.requestFocus();
-                    }
-
-
-                }
-
-                @Override
-                public void onFailure(Call<KeyAPI> call, Throwable t) {
-                    Toast.makeText(LoginActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
-                    mPasswordView.setError(getString(R.string.error_incorrect_password));
-                    mPasswordView.requestFocus();
-                    showProgress(false);
-                }
-            });
         }
     }
 
-    private boolean isIdValid(String id_ktp) {
-        //TODO: Replace this with your own logic
-        return id_ktp.length() == 16;
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
-
-
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -221,5 +205,30 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onLoginSuccess(KeyAPI respon) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        Toast.makeText(this, respon.getKeyAPI()
+                , Toast.LENGTH_SHORT).show();
+        showProgress(false);
+    }
+
+    @Override
+    public void onRLoginError(String massage) {
+                Toast.makeText(LoginActivity.this, massage, Toast.LENGTH_SHORT).show();
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+        showProgress(false);
+
+    }
+
+    @Override
+    public void onAPIError(ResponOther error) {
+        Toast.makeText(this, error.getStatusCode() +":" +error.getMassage(), Toast.LENGTH_SHORT).show();
+                    mPasswordView.setError(getString(R.string.error_incorrect_password));
+                    mPasswordView.requestFocus();
+        showProgress(false);
+    }
 }
 

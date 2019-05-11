@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Activity.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
+import com.harloomdev.camerabooking.Http.conf.Server;
 import com.harloomdev.camerabooking.R;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ProductAdpater extends RecyclerView.Adapter<ProductAdpater.ViewHolder> {
+    private static final String TAG ="products" ;
     private Context context;
     private ArrayList<Products> arrayList = new ArrayList<>();
     private OnProductClickListener mAdapterCallback;
@@ -41,8 +44,8 @@ public class ProductAdpater extends RecyclerView.Adapter<ProductAdpater.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder v, int i) {
         Products item = arrayList.get(i);
-
-        Glide.with(context).load(item.getUrlImage()).
+        Log.d(TAG,item.toString());
+        Glide.with(context).load(Server.BASE_URL_IMAGE+item.getUrlImage()).
                 into(v.v_imgProduct);
         v.v_nameProduct.setText(item.getNamaKamera());
         v.v_hargaProduct.setText("Rp. "+item.getHarga());

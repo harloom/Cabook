@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-
         app:animationDuration="1300"
         app:backSideColor="@color/colorPrimary"
         app:cameraHeight="20">
@@ -20,7 +19,7 @@
         <LinearLayout
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
             <LinearLayout
@@ -153,14 +152,14 @@
             <Button
                 android:id="@+id/cbtn_cancelOrder"
                 android:layout_width="300dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:cornerRadius="5dp"
-                android:background="@color/colorPrimary"
+                style="@style/Widget.MaterialComponents.Button"
                 android:textColor="#fff"
                 android:text="Batalkan"
                 android:textStyle="bold"
-                android:layout_marginBottom="5dp"/>
+                android:textSize="14sp"
+                android:layout_marginBottom="6dp"/>
         </LinearLayout>
         <!--cell tititle-->
         <LinearLayout
