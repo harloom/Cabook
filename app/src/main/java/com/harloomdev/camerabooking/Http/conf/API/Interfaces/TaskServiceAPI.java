@@ -66,7 +66,7 @@ public interface TaskServiceAPI {
     @PUT("charts/")
     Call<Chart> editChart (@Header("key_api") String key ,@Field("id_kamera") String idkamera,
                                       @Field("id_ktp") String id_ktp,@Field("jumlah") String jumlah,
-                           @Field("service") String idsevice);
+                           @Field("service") String idsevice , @Field("lama") int _lama);
 
 
     //viewKwitansi

@@ -1,6 +1,7 @@
 package com.harloomdev.camerabooking.Activity.Chart;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
@@ -47,9 +48,10 @@ public class ChartPresenter implements  IChartPresenter {
     }
 
     @Override
-    public void putEdit(PutChart putChart) {
+    public void putEdit(PutChart putChart,int _lama) {
         Call<Chart> call = taskServiceAPI.editChart(putChart.getKey(),putChart.getId_kamera(),putChart.getIdKtp(),
-                            putChart.getJumlah(),putChart.getService());
+                            putChart.getJumlah(),putChart.getService(),_lama);
+        Log.d("Jumlah Data " ,putChart.getJumlah());
         call.enqueue(new Callback<Chart>() {
             @Override
             public void onResponse(Call<Chart> call, Response<Chart> response) {
@@ -59,12 +61,10 @@ public class ChartPresenter implements  IChartPresenter {
                     ResponOther mError = ErrorAPIUtils.parseError(response);
                     iCekView.onEditRequestError(mError);
                 }
-
             }
-
             @Override
             public void onFailure(Call<Chart> call, Throwable t) {
-                iCekView.onSystemError(t.getMessage());
+                iCekView.onSystemError("Put : "+t.getMessage());
             }
         });
 

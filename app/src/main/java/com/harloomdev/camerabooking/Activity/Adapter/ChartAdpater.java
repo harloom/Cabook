@@ -43,7 +43,7 @@ public class ChartAdpater extends RecyclerView.Adapter<ChartAdpater.ViewHolder> 
         Log.d("Log : ",item.getRecordset().get(i).getJumlahPinjam().toString());
         Glide.with(context).load(Server.BASE_URL_IMAGE+item.getRecordset().get(i).getUrlImage()).
                 into(v.v_imgProduct);
-        v.v_nameProduct.setText(item.getRecordset().get(i).getNama());
+        v.v_nameProduct.setText(item.getRecordset().get(i).getNamaKamera());
         v.v_hargaProduct.setText("Rp. "+item.getRecordset().get(i).getHarga());
         v.v_count.setText(item.getRecordset().get(i).getJumlahPinjam().toString());
 

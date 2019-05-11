@@ -70,7 +70,7 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_today_black_24dp"/>
             <EditText
-
+                android:id="@+id/lama"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:hint="Berapa hari Senpai"
