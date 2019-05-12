@@ -1,5 +1,9 @@
 package com.harloomdev.camerabooking.Activity.Product;
 
-public interface IProductPresenter {
+import com.harloomdev.camerabooking.Activity.Chart.PutChart;
+
+public interface IProductPresenter  {
     void getDataAPI();
+    void getDataAPIChart(String id_ktp,String key);
+    void postData(PutChart putChart);
 }

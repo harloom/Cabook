@@ -13,7 +13,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+
+        android:id="@+id/linearLayout">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -48,4 +50,22 @@
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/floating_chart"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_local_white"
+        app:cornerRadius="1dp"
+        android:text="1 Item"
+        android:textSize="12sp"
+        android:textColor="#fff"
+        app:iconGravity="start"
+        app:iconTint="#fff"
+        app:backgroundTint="@color/colorPrimary"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="30dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

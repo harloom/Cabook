@@ -3,6 +3,7 @@ package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 import com.harloomdev.camerabooking.Activity.Chart.ServiceChart;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
+import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset_;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Profile.Profile;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
@@ -67,6 +68,14 @@ public interface TaskServiceAPI {
     Call<Chart> editChart (@Header("key_api") String key ,@Field("id_kamera") String idkamera,
                                       @Field("id_ktp") String id_ktp,@Field("jumlah") String jumlah,
                            @Field("service") String idsevice , @Field("lama") int _lama);
+    @FormUrlEncoded
+    @POST("charts/")
+    Call<List<Recordset_>> postChart (@Header("key_api") String key , @Field("id_kamera") String idkamera,
+                                      @Field("id_ktp") String id_ktp, @Field("jumlah") String jumlah,
+                                      @Field("service") String idsevice);
+
+
+    //Pesan
 
 
     //viewKwitansi
