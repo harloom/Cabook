@@ -207,8 +207,11 @@ public class LoginActivity extends AppCompatActivity  implements IloginView {
 
     @Override
     public void onLoginSuccess(KeyAPI respon) {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+
+        startActivity(new Intent(this, MainActivity.class).addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        );
         Toast.makeText(this, respon.getKeyAPI()
                 , Toast.LENGTH_SHORT).show();
         showProgress(false);

@@ -7,6 +7,7 @@ import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
 
 import java.util.List;
@@ -87,5 +88,27 @@ public class ChartPresenter implements  IChartPresenter {
                     iCekView.onGetResourceError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void PostOrder(String key, PostKwitansi postKwitansi) {
+        if (postKwitansi.valid()) {
+            Call<ResponOther> call = taskServiceAPI.postKwitansi(key,postKwitansi);
+            call.enqueue(new Callback<ResponOther>() {
+                @Override
+                public void onResponse(Call<ResponOther> call, Response<ResponOther> response) {
+                    if(response.isSuccessful()){
+                        iCekView.successPost(response.body());
+                    }else{
+                        iCekView.onAPIError(response.body());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponOther> call, Throwable t) {
+                    iCekView.onSystemError(t.getMessage());
+                }
+            });
+        }
     }
 }

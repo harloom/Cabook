@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Welcome Back Senpai"
+                android:text="Welcome "
                 android:textColor="#ffff"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -111,7 +111,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/ic_shopping_basket_black_24dp" />
+                            android:src="@drawable/ic_local_mall_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/ic_shopping_cart_" />
+                            android:src="@drawable/cart" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -183,7 +183,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/ic_textsms_black_24dp" />
+                            android:src="@drawable/contacme" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
-                            android:src="@drawable/ic_work_black_24dp" />
+                            android:src="@drawable/about" />
 
                         <TextView
                             android:layout_width="wrap_content"

@@ -1,5 +1,8 @@
 package com.harloomdev.camerabooking.Activity.Chart;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -8,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -16,13 +20,17 @@ import android.widget.Toast;
 import com.harloomdev.camerabooking.Activity.Adapter.ChartAdpater;
 import com.harloomdev.camerabooking.Activity.Adapter.OnChartClickListener;
 import com.harloomdev.camerabooking.Activity.Adapter.ServiceAdapter;
+import com.harloomdev.camerabooking.Activity.Product.ProductActivity;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
+import com.harloomdev.camerabooking.MainActivity;
 import com.harloomdev.camerabooking.R;
 import com.harloomdev.camerabooking.Utils.Preferences;
 
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,11 +43,13 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     private Preferences preferences;
     private Chart chart;
     private String id_service = "";
+    private Context context = this;
 
     //UI Decraltion
     private EditText txtLama;
+    private EditText txtAlamat;
     private TextView no;
-    private TextView txt_totalbayar, txt_ppn;
+    private TextView txt_totalbayar, txt_totalbayar1, txt_ppn;
     private Spinner spinner;
 
 
@@ -71,7 +81,9 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         recyclerView = (RecyclerView) findViewById(R.id.recy_chart);
         spinner = (Spinner) findViewById(R.id.spiner_service);
         no = findViewById(R.id.no_txt);
+        txtAlamat = findViewById(R.id.txt_alamat);
         txt_totalbayar = findViewById(R.id.txt_totalbayar);
+        txt_totalbayar1 = findViewById(R.id.txt_totalbayar1);
         txt_ppn = findViewById(R.id.ppn_txt);
         txtLama = findViewById(R.id.lama);
         txtLama.setText("1");
@@ -80,8 +92,6 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-
-
     }
 
     private void initRecyview() {
@@ -111,8 +121,8 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         if (!txtLama.getText().toString().equals("")) {
             send(data, Integer.parseInt(String.valueOf(txtLama.getText())));
 
-        }else{
-            send(data,1);
+        } else {
+            send(data, 1);
         }
 
     }
@@ -131,8 +141,8 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
         if (!txtLama.getText().toString().equals("")) {
             send(data, Integer.parseInt(String.valueOf(txtLama.getText())));
 
-        }else{
-            send(data,1);
+        } else {
+            send(data, 1);
         }
     }
 
@@ -163,7 +173,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
     @Override
     public void onAPIError(ResponOther error) {
-        if(error.getStatusCode() == 404){
+        if (error.getStatusCode() == 404) {
             finish();
         }
         Toast.makeText(this, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
@@ -182,7 +192,7 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
     @Override
     public void onEditRequestError(ResponOther responOther) {
-        if(responOther.getStatusCode() == 404){
+        if (responOther.getStatusCode() == 404) {
             finish();
         }
         Toast.makeText(this, responOther.getStatusCode() + " : " + responOther.getMassage(), Toast.LENGTH_SHORT).show();
@@ -203,6 +213,31 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
     }
 
     @Override
+    public void successPost(ResponOther successs) {
+        new AlertDialog.Builder(this).setTitle("Terima kasih :D").setMessage("Apakah Kamu Ingin Belanja Lagi").setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(context,ProductActivity.class).addFlags(
+                                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        startActivity(new Intent(context,MainActivity.class).addFlags(
+                                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    }
+                })
+                .create().show();
+    }
+
+
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         if (chart.getRecordset() != null) {
@@ -214,7 +249,8 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
     }
 
-    private void setDataService(String id_service) {
+    private void setDataService(String _id_service) {
+        id_service = _id_service;
         for (int i = 0; i < chart.getRecordset().size(); i++) {
             chart.getRecordset().get(i).setId_service(id_service);
             PutChart data = new PutChart(preferences.getKeyAPI(), preferences.getIDKTP(),
@@ -233,8 +269,9 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
     private void initDataUI() {
         no.setText(preferences.getIDKTP());
-        txt_totalbayar.setText("RP. " + chart.getTotalBayar());
-        txt_ppn.setText("Rp. " + chart.getTotalPajak());
+        txt_totalbayar.setText("RP. " + String.format("%,d", chart.getTotalBayar()));
+        txt_totalbayar1.setText("Rp. " + String.format("%,d", chart.getTotalBayar() + chart.getTotalPajak()));
+        txt_ppn.setText("Rp. " + String.format("%,d", chart.getTotalPajak()));
     }
 
     private TextWatcher textWatcher = new TextWatcher() {
@@ -260,4 +297,14 @@ public class CekAcivity extends AppCompatActivity implements OnChartClickListene
 
         }
     };
+
+    public void PostOrderClick(View view) {
+        if (TextUtils.isEmpty(txtLama.getText().toString()) || TextUtils.isEmpty(txtAlamat.getText().toString())) {
+                return;
+        }
+        PostKwitansi mPost = new PostKwitansi(preferences.getIDKTP(), Integer.parseInt(txtLama.getText().toString()),
+                id_service, txtAlamat.getText().toString());
+            iChartPresenter.PostOrder(preferences.getKeyAPI(),mPost);
+
+    }
 }

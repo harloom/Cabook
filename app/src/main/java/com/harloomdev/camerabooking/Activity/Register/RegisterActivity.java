@@ -187,6 +187,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     mRegFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                    mBtnSignup.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
@@ -203,6 +204,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mRegFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mBtnSignup.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

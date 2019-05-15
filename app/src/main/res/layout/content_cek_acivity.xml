@@ -30,7 +30,7 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_home_black_24dp"/>
             <EditText
-
+                android:id="@+id/txt_alamat"
                 android:layout_weight="1"
                 android:textSize="14sp"
                 android:hint="Alamatnya Senpai?"
@@ -199,21 +199,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
-                android:id="@id/txt_totalbayar"
+                android:id="@+id/txt_totalbayar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:text="12000"
-                android:layout_margin="5dp"
+                android:layout_marginEnd="10dp"
+
+                android:gravity="right"
                 android:textColor="#000000"/>
             <Button
+                android:id="@+id/btnPostOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Order"
                 android:gravity="center"
                 android:textColor="#fff"
+                android:onClick="PostOrderClick"
                 android:background="@color/colorPrimary"/>
         </LinearLayout>
 

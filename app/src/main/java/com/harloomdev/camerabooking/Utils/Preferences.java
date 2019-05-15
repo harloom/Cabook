@@ -38,6 +38,13 @@ public class Preferences {
         editor.apply();
     }
 
+    public void logout(){
+        editor.remove(keyAPI);
+        editor.remove(keyID);
+        editor.putBoolean(flagLogin,false);
+        editor.apply();
+    }
+
     public String getIDKTP(){
         return mSharedPreferences.getString(keyID,"");
     }

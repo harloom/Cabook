@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Activity.Chart;
 
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.ViewKwitansi;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface ICekView {
     void onSystemError(String massage);
 
     void onGetServiceSuccess(List<ServiceChart> serviceChart);
+
+    void successPost(ResponOther success);
 
 
 }

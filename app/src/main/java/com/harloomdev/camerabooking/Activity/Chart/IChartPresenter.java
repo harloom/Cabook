@@ -7,4 +7,5 @@ public interface IChartPresenter {
     void getChart(String id_ktp,String key);
     void putEdit(PutChart putChart , int _lama);
     void getService();
+    void PostOrder(String key ,PostKwitansi postKwitansi );
 }

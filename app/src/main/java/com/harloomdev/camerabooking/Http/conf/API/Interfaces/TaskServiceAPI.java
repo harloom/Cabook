@@ -1,5 +1,6 @@
 package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 
+import com.harloomdev.camerabooking.Activity.Chart.PostKwitansi;
 import com.harloomdev.camerabooking.Activity.Chart.ServiceChart;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
@@ -76,6 +77,8 @@ public interface TaskServiceAPI {
 
 
     //Pesan
+    @POST("kwintasi")
+    Call<ResponOther> postKwitansi (@Header("key_api") String key, @Body PostKwitansi postKwitansi);
 
 
     //viewKwitansi

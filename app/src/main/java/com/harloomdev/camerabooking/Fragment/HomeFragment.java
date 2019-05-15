@@ -15,6 +15,7 @@ import com.harloomdev.camerabooking.Fragment.Account.IProfileView;
 import com.harloomdev.camerabooking.Fragment.Account.ProfilePresenter;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Profile.Profile;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.LoginActivity;
 import com.harloomdev.camerabooking.R;
 import com.harloomdev.camerabooking.Utils.Preferences;
 
@@ -108,6 +109,15 @@ public class HomeFragment extends Fragment implements IProfileView {
     public void onAPIError(ResponOther error) {
         if(context!=null) {
             Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void callbackLogout(Boolean aBoolean) {
+        if(!aBoolean){
+            startActivity(new Intent(context, LoginActivity.class).addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK)
+            );
         }
     }
 }

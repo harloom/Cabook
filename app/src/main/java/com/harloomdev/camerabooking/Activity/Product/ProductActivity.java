@@ -16,6 +16,7 @@ import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset_;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Products;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
+import com.harloomdev.camerabooking.MainActivity;
 import com.harloomdev.camerabooking.R;
 import com.harloomdev.camerabooking.Utils.Preferences;
 
@@ -59,7 +60,11 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        productPresenter.getDataAPIChart(mPreferences.getIDKTP(),mPreferences.getKeyAPI());
+    }
 
     private void initRecyleView(){
         GridLayoutManager gridLayoutManager  = new GridLayoutManager(context, 2);
@@ -90,8 +95,20 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
 
     @Override
     public boolean onSupportNavigateUp() {
+        startActivity(new Intent(this,MainActivity.class).addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+        ));
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,MainActivity.class).addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK
+        ));
+        finish();
     }
 
     @Override
@@ -110,6 +127,8 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
     @Override
     public void onAPIError(ResponOther error) {
         Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+            mFloatingChart.setVisibility(View.GONE);
+
     }
 
     @Override

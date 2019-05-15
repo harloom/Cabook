@@ -7,4 +7,6 @@ public interface IProfileView {
     void onGetResourceSuccess(Profile data);
     void onGetResourceError(String massage);
     void onAPIError(ResponOther error);
+
+    void callbackLogout(Boolean aBoolean);
 }

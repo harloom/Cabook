@@ -7,6 +7,7 @@ import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Profile.Profile;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
 import com.harloomdev.camerabooking.Utils.ErrorAPIUtils;
+import com.harloomdev.camerabooking.Utils.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,5 +42,12 @@ public class ProfilePresenter implements IProfilePresenter {
                 mIProfileView.onGetResourceError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void Logout() {
+        Preferences mPreferences = new Preferences(context);
+        mPreferences.logout();
+        mIProfileView.callbackLogout(true);
     }
 }
