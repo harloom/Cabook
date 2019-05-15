@@ -25,6 +25,7 @@ public class OrdersPresenter  implements IOrdersPresenter{
     public OrdersPresenter(Context context, IOrdersView iOrdersView) {
         this.context = context;
         this.iOrdersView = iOrdersView;
+        this.api = APIClient.createService().create(TaskServiceAPI.class);
     }
 
     @Override
@@ -32,8 +33,7 @@ public class OrdersPresenter  implements IOrdersPresenter{
         Map<String , String > map  = new HashMap<>();
         map.put("Content-Type","pplication/json");
         map.put("key_api" , _keyAPI);
-        TaskServiceAPI taskServiceAPI = APIClient.createService().create(TaskServiceAPI.class);
-        Call<ArrayList<ViewKwitansi>> call = taskServiceAPI.getViewKwitansi(map,_param);
+        Call<ArrayList<ViewKwitansi>> call = api.getViewKwitansi(map,_param);
         call.enqueue(new Callback<ArrayList<ViewKwitansi>>() {
             @Override
             public void onResponse(Call<ArrayList<ViewKwitansi>> call, Response<ArrayList<ViewKwitansi>> response) {
@@ -51,5 +51,27 @@ public class OrdersPresenter  implements IOrdersPresenter{
                 iOrdersView.onGetResourceError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void cancelOrder(String key, String id_ktp,String no_kwitansi) {
+        Call<ResponOther> call = api.cancelOrder(key,id_ktp,no_kwitansi);
+        call.enqueue(new Callback<ResponOther>() {
+            @Override
+            public void onResponse(Call<ResponOther> call, Response<ResponOther> response) {
+                if(response.isSuccessful()){
+                    iOrdersView.onCancelOrderSuccess(response.body());
+                }else{
+                    iOrdersView.onAPIError(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponOther> call, Throwable t) {
+                    iOrdersView.onGetResourceError(t.getMessage());
+            }
+        });
+
     }
 }

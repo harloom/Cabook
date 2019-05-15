@@ -10,4 +10,7 @@ public interface IOrdersView {
     void onGetResourceSuccess(ArrayList<ViewKwitansi> _kwitansi);
     void onGetResourceError(String massage);
     void onAPIError(ResponOther error);
+
+    void onCancelOrderSuccess(ResponOther respon);
+
 }

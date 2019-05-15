@@ -159,6 +159,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     @Override
     public void onRegisterSuccess(ResponOther respon) {
         Toast.makeText(this, respon.getMassage(), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Http.conf.API.Interfaces;
 
 import com.harloomdev.camerabooking.Activity.Chart.PostKwitansi;
 import com.harloomdev.camerabooking.Activity.Chart.ServiceChart;
+import com.harloomdev.camerabooking.Activity.History.History;
 import com.harloomdev.camerabooking.Http.conf.API.KeyAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Chart;
 import com.harloomdev.camerabooking.Http.conf.API.Model.Charts.Recordset_;
@@ -17,6 +18,7 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -80,12 +82,20 @@ public interface TaskServiceAPI {
     @POST("kwintasi")
     Call<ResponOther> postKwitansi (@Header("key_api") String key, @Body PostKwitansi postKwitansi);
 
+    //batalkan
+    @FormUrlEncoded
+    @DELETE("kwintasi")
+    Call<ResponOther> cancelOrder (@Header("key_api") String key,@Field("id_ktp")String id_ktp,
+                                   @Field("no_kwitansi") String no_kwitansi);
+
 
     //viewKwitansi
     @GET("kwintasi/{id_ktp}")
     Call<ArrayList<ViewKwitansi>> getViewKwitansi(@HeaderMap Map<String,String> headers, @Path("id_ktp") String _idKTP);
 
-
+    //history
+    @GET("kwintasi/history/{id_ktp}")
+    Call<List<History>> getHistory(@Header("key_api") String key,@Path("id_ktp") String _idKTP);
 
 
 }

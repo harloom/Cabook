@@ -1,10 +1,12 @@
 package com.harloomdev.camerabooking.Fragment.Orders;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,17 +36,20 @@ import retrofit2.Response;
 
 import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 
-public class OrdersFragment extends Fragment implements OnOrderClickListener , IOrdersView {
+        public class OrdersFragment extends Fragment implements OnOrderClickListener , IOrdersView {
     private static final String TAG = "OrdersFragment";
     private TextView mTextMessage;
+    private ImageView btnHistory;
     private RecyclerView mRecyclerView;
     private OrderAdapter mOrderAdapter;
     private ArrayList<ViewKwitansi> mViewKwitansis = new ArrayList<>();
+    private Preferences preferences ;
 
-
-    //adapter presenter
+            //adapter presenter
     private Context context = null;
     private OrdersPresenter presenter;
+
+
 
 
     @Nullable
@@ -59,9 +65,16 @@ public class OrdersFragment extends Fragment implements OnOrderClickListener , I
         context = view.getContext();
         mTextMessage = (TextView) view.findViewById(R.id.message);
         mTextMessage.setText(R.string.title_orders);
+        btnHistory = (ImageView) view.findViewById(R.id.btnHistory);
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         mRecyclerView =  view.findViewById(R.id.recy_fOrder);
         presenter  = new OrdersPresenter(context,this);
-        Preferences preferences = new Preferences(context);
+         preferences = new Preferences(context);
         presenter.sendData(preferences.getKeyAPI(),preferences.getIDKTP());
 
 
@@ -105,8 +118,21 @@ public class OrdersFragment extends Fragment implements OnOrderClickListener , I
     }
 
     @Override
-    public void onCancel(int position) {
-        Toast.makeText(getContext(), mViewKwitansis.get(position).getNoKwitansi(), Toast.LENGTH_SHORT).show();
+    public void onCancel(final int position) {
+        new AlertDialog.Builder(context).setTitle("Konfirmasi?").setCancelable(false).setMessage("Apakah Benar Ingin Membatlakan Pesanan \n"+
+        "No Kwitansi : " + mViewKwitansis.get(position).getNoKwitansi()).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        }).setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.cancelOrder(preferences.getKeyAPI(),preferences.getIDKTP(),mViewKwitansis.get(position).getNoKwitansi());
+            }
+        }).create().show();
+
+
     }
 
     @Override
@@ -131,5 +157,12 @@ public class OrdersFragment extends Fragment implements OnOrderClickListener , I
     public void onAPIError(ResponOther error) {
         if(context==null){return;}
         Toast.makeText(context, error.getStatusCode() +" : "+ error.getMassage(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancelOrderSuccess(ResponOther respon) {
+        if(respon.getStatusCode() ==200){
+            presenter.sendData(preferences.getKeyAPI(),preferences.getIDKTP());
+        }
     }
 }

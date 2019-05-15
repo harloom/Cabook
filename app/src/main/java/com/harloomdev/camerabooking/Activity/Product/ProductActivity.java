@@ -46,7 +46,6 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
         setContentView(R.layout.activity_product);
         productPresenter = new ProductPresenter(this,this);
         mPreferences = new Preferences(context);
-        productPresenter.getDataAPIChart(mPreferences.getIDKTP(),mPreferences.getKeyAPI());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.recy_products);
         mFloatingChart = (ExtendedFloatingActionButton) findViewById(R.id.floating_chart);
@@ -61,10 +60,12 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         productPresenter.getDataAPIChart(mPreferences.getIDKTP(),mPreferences.getKeyAPI());
     }
+
+
 
     private void initRecyleView(){
         GridLayoutManager gridLayoutManager  = new GridLayoutManager(context, 2);
@@ -126,7 +127,8 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
 
     @Override
     public void onAPIError(ResponOther error) {
-        Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
+            productPresenter.getDataAPIChart(mPreferences.getIDKTP(),mPreferences.getKeyAPI());
             mFloatingChart.setVisibility(View.GONE);
 
     }
