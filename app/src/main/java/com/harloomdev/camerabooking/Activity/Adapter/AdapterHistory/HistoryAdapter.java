@@ -41,7 +41,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rcy_orders,parent,false  );
+        View view = LayoutInflater.from(context).inflate(R.layout.rcy_hisotry,parent,false  );
         return new ViewHolder(view,mOnHistoryrClickListener);
     }
 
@@ -68,7 +68,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.v_calamatAntar.setText(mHistory.getAlamatAntar());
         holder.v_cjenisService.setText(mHistory.getNamaPelayanan());
         holder.v_ctxtTotal.setText("Rp. "+hitungTotal(mHistory.getDetail()));
-        holder.v_ctxtTotalBayar.setText("Rp. "+hitungTotal(mHistory.getDetail()));
+
 
 
     }
@@ -112,8 +112,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView v_ctgl,v_ctglEx;
         TextView v_cnoKwitansi,v_cnamaOrder,v_calamatAntar,v_cjenisService;
         TextView v_ctxtTotal;
-        TextView v_ctxtTotalBayar;
-        Button v_btnCancelOrder ;
+
+
 
         //recyviewOrderBrang
         RecyclerView mRecyleOrderBarang;
@@ -148,13 +148,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             v_cnamaOrder = itemV.findViewById(R.id.ctxtNamaOrder);
             v_calamatAntar = itemV.findViewById(R.id.ctxtAlamatAntar);
             v_ctxtTotal = itemV.findViewById(R.id.ctxtTotal);
-            v_ctxtTotalBayar = itemV.findViewById(R.id.ctxtTotalBayar);
-            v_btnCancelOrder = itemV.findViewById(R.id.cbtn_cancelOrder);
+
             v_cjenisService = itemV.findViewById(R.id.ctxt_jenisService);
             mRecyleOrderBarang = itemV.findViewById(R.id.recyleOrderBarang);
 
             //function
-            v_btnCancelOrder.setOnClickListener(cancelOrder);
+
             mFcContent.setOnClickListener(folding);
             mFctitle.setOnClickListener(folding);
 
@@ -165,12 +164,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         }
 
-        View.OnClickListener cancelOrder = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mOnHistoryrClickListener.onCancel(getAdapterPosition());
-            }
-        };
 
         View.OnClickListener folding = new View.OnClickListener() {
             @Override

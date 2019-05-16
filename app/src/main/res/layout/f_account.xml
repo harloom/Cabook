@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bakground_login">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -36,22 +37,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:elevation="10dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/profile_nama"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:gravity="center"
-                android:text="Harloom"
+                android:text="Admin"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="#ffff"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffff"/>
         </LinearLayout>
 
         <androidx.cardview.widget.CardView

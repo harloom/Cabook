@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+
 import com.harloomdev.camerabooking.Activity.History.Detail;
 import com.harloomdev.camerabooking.Http.conf.Server;
 import com.harloomdev.camerabooking.R;
@@ -19,13 +20,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HistoryProduct extends RecyclerView.Adapter<HistoryProduct.ViewHolder> {
-    private List<com.harloomdev.camerabooking.Activity.History.Detail> details ;
+    private List<Detail> details ;
     private Context context;
 
 
 
     public HistoryProduct(List<Detail> detail, Context context) {
-        this.details = details;
+        this.details = detail;
         this.context = context;
     }
 

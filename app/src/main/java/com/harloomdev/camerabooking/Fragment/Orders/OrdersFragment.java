@@ -2,6 +2,7 @@ package com.harloomdev.camerabooking.Fragment.Orders;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.harloomdev.camerabooking.Activity.Adapter.AdapterOrders.OnOrderClickListener;
 import com.harloomdev.camerabooking.Activity.Adapter.AdapterOrders.OrderAdapter;
+import com.harloomdev.camerabooking.Activity.History.HistoryActivity;
 import com.harloomdev.camerabooking.Http.conf.API.Client.APIClient;
 import com.harloomdev.camerabooking.Http.conf.API.Interfaces.TaskServiceAPI;
 import com.harloomdev.camerabooking.Http.conf.API.Model.ResponErrors.ResponOther;
@@ -69,7 +71,7 @@ import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(context,HistoryActivity.class));
             }
         });
         mRecyclerView =  view.findViewById(R.id.recy_fOrder);
@@ -143,6 +145,7 @@ import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 
     @Override
     public void onGetResourceSuccess(ArrayList<ViewKwitansi> _kwitansi) {
+        mViewKwitansis.clear();
         mViewKwitansis.addAll(_kwitansi);
         initRecyleview();
     }
@@ -157,12 +160,17 @@ import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
     public void onAPIError(ResponOther error) {
         if(context==null){return;}
         Toast.makeText(context, error.getStatusCode() +" : "+ error.getMassage(), Toast.LENGTH_SHORT).show();
+        if(error.getStatusCode().equals(404)){
+            mViewKwitansis.clear();
+            if(mOrderAdapter != null){
+                mOrderAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override
     public void onCancelOrderSuccess(ResponOther respon) {
-        if(respon.getStatusCode() ==200){
             presenter.sendData(preferences.getKeyAPI(),preferences.getIDKTP());
-        }
+
     }
 }

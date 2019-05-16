@@ -83,10 +83,9 @@ public interface TaskServiceAPI {
     Call<ResponOther> postKwitansi (@Header("key_api") String key, @Body PostKwitansi postKwitansi);
 
     //batalkan
-    @FormUrlEncoded
-    @DELETE("kwintasi")
-    Call<ResponOther> cancelOrder (@Header("key_api") String key,@Field("id_ktp")String id_ktp,
-                                   @Field("no_kwitansi") String no_kwitansi);
+    @DELETE("kwintasi/{id_ktp}/{no_kwitansi}")
+    Call<ResponOther> cancelOrder (@Header("key_api") String key,@Path("id_ktp")String id_ktp,
+                                   @Path("no_kwitansi") String no_kwitansi);
 
 
     //viewKwitansi
