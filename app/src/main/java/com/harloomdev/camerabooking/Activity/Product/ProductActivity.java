@@ -127,10 +127,7 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
 
     @Override
     public void onAPIError(ResponOther error) {
-//        Toast.makeText(context, error.getStatusCode() + " : " + error.getMassage(), Toast.LENGTH_SHORT).show();
-            productPresenter.getDataAPIChart(mPreferences.getIDKTP(),mPreferences.getKeyAPI());
-            mFloatingChart.setVisibility(View.GONE);
-
+            setLabelChart(0);
     }
 
     @Override
@@ -157,3 +154,42 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
         startActivity(new Intent(context,CekAcivity.class));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

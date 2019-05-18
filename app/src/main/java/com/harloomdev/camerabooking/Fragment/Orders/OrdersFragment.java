@@ -158,7 +158,7 @@ import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 
     @Override
     public void onAPIError(ResponOther error) {
-        if(context==null){return;}
+
         Toast.makeText(context, error.getStatusCode() +" : "+ error.getMassage(), Toast.LENGTH_SHORT).show();
         if(error.getStatusCode().equals(404)){
             mViewKwitansis.clear();
@@ -170,7 +170,17 @@ import  com.harloomdev.camerabooking.Http.conf.API.Model.ViewKwitansi.Detail;
 
     @Override
     public void onCancelOrderSuccess(ResponOther respon) {
+        if(respon.getStatusCode() == 500){
+            new AlertDialog.Builder(context).setTitle("Pemberitahuan").setCancelable(false).setMessage("Barang Sedang Diterima").setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                   dialog.cancel();
+                }
+            }).create().show();
+        }else{
             presenter.sendData(preferences.getKeyAPI(),preferences.getIDKTP());
+        }
+
 
     }
 }

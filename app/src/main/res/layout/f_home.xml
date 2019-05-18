@@ -238,7 +238,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:paddingBottom="20dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             app:cardCornerRadius="3dp"
@@ -246,9 +245,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="vertical"
-                android:background="@drawable/bg_card">
+                android:background="@drawable/bg_card"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -264,6 +263,7 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="5dp"
                     android:background="#fff"/>
 
                 <HorizontalScrollView

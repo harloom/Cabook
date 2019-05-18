@@ -61,10 +61,7 @@ public class OrdersPresenter  implements IOrdersPresenter{
             public void onResponse(Call<ResponOther> call, Response<ResponOther> response) {
                 if(response.isSuccessful()){
                     iOrdersView.onCancelOrderSuccess(response.body());
-                }else{
-                    iOrdersView.onAPIError(response.body());
                 }
-
             }
 
             @Override
