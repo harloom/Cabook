@@ -127,8 +127,14 @@ public class ProductActivity extends AppCompatActivity implements IProductView, 
 
     @Override
     public void onAPIError(ResponOther error) {
+        if (error.getStatusCode() == 404) {
+            mFloatingChart.setVisibility(View.GONE);
+        } else {
             setLabelChart(0);
+        }
     }
+
+
 
     @Override
     public void onGetChart(Chart charts) {
